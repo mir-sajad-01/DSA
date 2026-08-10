@@ -1,0 +1,668 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "java",
+      "name": "_29_updateArray",
+      "request": "launch",
+      "mainClass": "_29_updateArray",
+      "projectName": "JAVA PROGRAMMING LANGUAGE_f1f32dee"
+    },
+    {
+      "type": "java",
+      "name": "_156_validBst",
+      "request": "launch",
+      "mainClass": "_156_validBst",
+      "projectName": "JAVA PROGRAMMING LANGUAGE_b1abba06"
+    },
+    {
+      "type": "java",
+      "name": "_155_rootToLeaf",
+      "request": "launch",
+      "mainClass": "_155_rootToLeaf",
+      "projectName": "JAVA PROGRAMMING LANGUAGE_b1abba06"
+    },
+    {
+      "type": "java",
+      "name": "_154_printInRange",
+      "request": "launch",
+      "mainClass": "_154_printInRange",
+      "projectName": "JAVA PROGRAMMING LANGUAGE_b1abba06"
+    },
+    {
+      "type": "java",
+      "name": "_151_BinarySearchTree",
+      "request": "launch",
+      "mainClass": "_151_BinarySearchTree",
+      "projectName": "JAVA PROGRAMMING LANGUAGE_b1abba06"
+    },
+    {
+      "type": "java",
+      "name": "_144_IdenticalSubtree",
+      "request": "launch",
+      "mainClass": "_144_IdenticalSubtree",
+      "projectName": "JAVA PROGRAMMING LANGUAGE_b1abba06"
+    },
+    {
+      "type": "java",
+      "name": "_143_diameterOfTree",
+      "request": "launch",
+      "mainClass": "_143_diameterOfTree",
+      "projectName": "JAVA PROGRAMMING LANGUAGE_b1abba06"
+    },
+    {
+      "type": "java",
+      "name": "_141_CountOfNodes",
+      "request": "launch",
+      "mainClass": "_141_CountOfNodes",
+      "projectName": "JAVA PROGRAMMING LANGUAGE_b1abba06"
+    },
+    {
+      "type": "java",
+      "name": "_40_stocks",
+      "request": "launch",
+      "mainClass": "_40_stocks",
+      "projectName": "JAVA PROGRAMMING LANGUAGE_b1abba06"
+    },
+    {
+      "type": "java",
+      "name": "_103_ArrayList",
+      "request": "launch",
+      "mainClass": "_103_ArrayList",
+      "projectName": "JAVA PROGRAMMING LANGUAGE_b1abba06"
+    },
+    {
+      "type": "java",
+      "name": "_60_stringcompression",
+      "request": "launch",
+      "mainClass": "_60_stringcompression",
+      "projectName": "JAVA PROGRAMMING LANGUAGE_b1abba06"
+    },
+    {
+      "type": "java",
+      "name": "_179_ItineraryTickets",
+      "request": "launch",
+      "mainClass": "_179_ItineraryTickets",
+      "projectName": "JAVA PROGRAMMING LANGUAGE_b1abba06"
+    },
+    {
+      "type": "java",
+      "name": "_178_UnionIntersction",
+      "request": "launch",
+      "mainClass": "_178_UnionIntersction",
+      "projectName": "JAVA PROGRAMMING LANGUAGE_b1abba06"
+    },
+    {
+      "type": "java",
+      "name": "_177_CountDistnctElmnts",
+      "request": "launch",
+      "mainClass": "_177_CountDistnctElmnts",
+      "projectName": "JAVA PROGRAMMING LANGUAGE_b1abba06"
+    },
+    {
+      "type": "java",
+      "name": "_176_HashLinkedhsTreehs",
+      "request": "launch",
+      "mainClass": "_176_HashLinkedhsTreehs",
+      "projectName": "JAVA PROGRAMMING LANGUAGE_b1abba06"
+    },
+    {
+      "type": "java",
+      "name": "_172_LinkedHashMap",
+      "request": "launch",
+      "mainClass": "_172_LinkedHashMap",
+      "projectName": "JAVA PROGRAMMING LANGUAGE_b1abba06"
+    },
+    {
+      "type": "java",
+      "name": "_34_pairsinarray",
+      "request": "launch",
+      "mainClass": "_34_pairsinarray",
+      "projectName": "JAVA PROGRAMMING LANGUAGE_b1abba06"
+    },
+    {
+      "type": "java",
+      "name": "selection",
+      "request": "launch",
+      "mainClass": "selection",
+      "projectName": "JAVA PROGRAMMING LANGUAGE_b1abba06"
+    },
+    {
+      "type": "java",
+      "name": "_29_updateArray",
+      "request": "launch",
+      "mainClass": "_29_updateArray",
+      "projectName": "JAVA PROGRAMMING LANGUAGE_b1abba06"
+    },
+    {
+      "type": "java",
+      "name": "_45_inbuiltsort",
+      "request": "launch",
+      "mainClass": "_45_inbuiltsort",
+      "projectName": "JAVA PROGRAMMING LANGUAGE_b1abba06"
+    },
+    {
+      "type": "java",
+      "name": "practice",
+      "request": "launch",
+      "mainClass": "practice",
+      "projectName": "JAVA PROGRAMMING LANGUAGE_b1abba06"
+    },
+    {
+      "type": "java",
+      "name": "_162_PriorityQueues",
+      "request": "launch",
+      "mainClass": "_162_PriorityQueues",
+      "projectName": "JAVA PROGRAMMING LANGUAGE_b1abba06"
+    },
+    {
+      "type": "java",
+      "name": "_126_Nonrepeatngltr",
+      "request": "launch",
+      "mainClass": "_126_Nonrepeatngltr",
+      "projectName": "JAVA PROGRAMMING LANGUAGE_b1abba06"
+    },
+    {
+      "type": "java",
+      "name": "_36_subarraysumBrute",
+      "request": "launch",
+      "mainClass": "_36_subarraysumBrute",
+      "projectName": "JAVA PROGRAMMING LANGUAGE_b1abba06"
+    },
+    {
+      "type": "java",
+      "name": "_38_kadanessum",
+      "request": "launch",
+      "mainClass": "_38_kadanessum",
+      "projectName": "JAVA PROGRAMMING LANGUAGE_b1abba06"
+    },
+    {
+      "type": "java",
+      "name": "_169_SlidngWndwMxm",
+      "request": "launch",
+      "mainClass": "_169_SlidngWndwMxm",
+      "projectName": "JAVA PROGRAMMING LANGUAGE_b1abba06"
+    },
+    {
+      "type": "java",
+      "name": "_164_InsertInHeap",
+      "request": "launch",
+      "mainClass": "_164_InsertInHeap",
+      "projectName": "JAVA PROGRAMMING LANGUAGE_b1abba06"
+    },
+    {
+      "type": "java",
+      "name": "_142_treeTraversals",
+      "request": "launch",
+      "mainClass": "_142_treeTraversals",
+      "projectName": "JAVA PROGRAMMING LANGUAGE_b1abba06"
+    },
+    {
+      "type": "java",
+      "name": "_140_BuildTreePreorder",
+      "request": "launch",
+      "mainClass": "_140_BuildTreePreorder",
+      "projectName": "JAVA PROGRAMMING LANGUAGE_b1abba06"
+    },
+    {
+      "type": "java",
+      "name": "_55_directionstringqs",
+      "request": "launch",
+      "mainClass": "_55_directionstringqs",
+      "projectName": "JAVA PROGRAMMING LANGUAGE_b1abba06"
+    },
+    {
+      "type": "java",
+      "name": "_41_bubblesort",
+      "request": "launch",
+      "mainClass": "_41_bubblesort",
+      "projectName": "JAVA PROGRAMMING LANGUAGE_b1abba06"
+    },
+    {
+      "type": "java",
+      "name": "_83_fibonacci",
+      "request": "launch",
+      "mainClass": "_83_fibonacci",
+      "projectName": "JAVA PROGRAMMING LANGUAGE_b1abba06"
+    },
+    {
+      "type": "java",
+      "name": "_59_letterstouppercase",
+      "request": "launch",
+      "mainClass": "_59_letterstouppercase",
+      "projectName": "JAVA PROGRAMMING LANGUAGE_b1abba06"
+    },
+    {
+      "type": "java",
+      "name": "_57_largeststring",
+      "request": "launch",
+      "mainClass": "_57_largeststring",
+      "projectName": "JAVA PROGRAMMING LANGUAGE_b1abba06"
+    },
+    {
+      "type": "java",
+      "name": "_56_substring",
+      "request": "launch",
+      "mainClass": "_56_substring",
+      "projectName": "JAVA PROGRAMMING LANGUAGE_b1abba06"
+    },
+    {
+      "type": "java",
+      "name": "_19_decimaltobinary",
+      "request": "launch",
+      "mainClass": "_19_decimaltobinary",
+      "projectName": "JAVA PROGRAMMING LANGUAGE_b1abba06"
+    },
+    {
+      "type": "java",
+      "name": "_174_MajorityElmnt",
+      "request": "launch",
+      "mainClass": "_174_MajorityElmnt",
+      "projectName": "JAVA PROGRAMMING LANGUAGE_b1abba06"
+    },
+    {
+      "type": "java",
+      "name": "Solution",
+      "request": "launch",
+      "mainClass": "Solution",
+      "projectName": "JAVA PROGRAMMING LANGUAGE_b1abba06"
+    },
+    {
+      "type": "java",
+      "name": "_40_stocks",
+      "request": "launch",
+      "mainClass": "_40_stocks",
+      "projectName": "JAVA PROGRAMMING LANGUAGE_38506dea"
+    },
+    {
+      "type": "java",
+      "name": "_39_TrappingRain",
+      "request": "launch",
+      "mainClass": "_39_TrappingRain",
+      "projectName": "JAVA PROGRAMMING LANGUAGE_38506dea"
+    },
+    {
+      "type": "java",
+      "name": "_38_kadanessum",
+      "request": "launch",
+      "mainClass": "_38_kadanessum",
+      "projectName": "JAVA PROGRAMMING LANGUAGE_38506dea"
+    },
+    {
+      "type": "java",
+      "name": "_37_subarraysumPrefix",
+      "request": "launch",
+      "mainClass": "_37_subarraysumPrefix",
+      "projectName": "JAVA PROGRAMMING LANGUAGE_38506dea"
+    },
+    {
+      "type": "java",
+      "name": "_36_subarraysumBrute",
+      "request": "launch",
+      "mainClass": "_36_subarraysumBrute",
+      "projectName": "JAVA PROGRAMMING LANGUAGE_38506dea"
+    },
+    {
+      "type": "java",
+      "name": "Solution",
+      "request": "launch",
+      "mainClass": "Solution",
+      "projectName": "JAVA PROGRAMMING LANGUAGE_38506dea"
+    },
+    {
+      "type": "java",
+      "name": "_34_pairsinarray",
+      "request": "launch",
+      "mainClass": "_34_pairsinarray",
+      "projectName": "JAVA PROGRAMMING LANGUAGE_38506dea"
+    },
+    {
+      "type": "java",
+      "name": "_35_subarray",
+      "request": "launch",
+      "mainClass": "_35_subarray",
+      "projectName": "JAVA PROGRAMMING LANGUAGE_38506dea"
+    },
+    {
+      "type": "java",
+      "name": "quick",
+      "request": "launch",
+      "mainClass": "quick",
+      "projectName": "JAVA PROGRAMMING LANGUAGE_7a4df31b"
+    },
+    {
+      "type": "java",
+      "name": "_94_QuickSort",
+      "request": "launch",
+      "mainClass": "_94_QuickSort",
+      "projectName": "JAVA PROGRAMMING LANGUAGE_7a4df31b"
+    },
+    {
+      "type": "java",
+      "name": "_42_selectionsort",
+      "request": "launch",
+      "mainClass": "_42_selectionsort",
+      "projectName": "JAVA PROGRAMMING LANGUAGE_7a4df31b"
+    },
+    {
+      "type": "java",
+      "name": "_55_directionstringqs",
+      "request": "launch",
+      "mainClass": "_55_directionstringqs",
+      "projectName": "JAVA PROGRAMMING LANGUAGE_7a4df31b"
+    },
+    {
+      "type": "java",
+      "name": "_50_diagonalsum",
+      "request": "launch",
+      "mainClass": "_50_diagonalsum",
+      "projectName": "JAVA PROGRAMMING LANGUAGE_7a4df31b"
+    },
+    {
+      "type": "java",
+      "name": "index",
+      "request": "launch",
+      "mainClass": "index",
+      "projectName": "JAVA PROGRAMMING LANGUAGE_7a4df31b"
+    },
+    {
+      "type": "java",
+      "name": "_140_BuildTreePreorder",
+      "request": "launch",
+      "mainClass": "_140_BuildTreePreorder",
+      "projectName": "JAVA PROGRAMMING LANGUAGE_7a4df31b"
+    },
+    {
+      "type": "java",
+      "name": "_83_fibonacci",
+      "request": "launch",
+      "mainClass": "_83_fibonacci",
+      "projectName": "JAVA PROGRAMMING LANGUAGE_7a4df31b"
+    },
+    {
+      "type": "java",
+      "name": "_40_stocks",
+      "request": "launch",
+      "mainClass": "_40_stocks",
+      "projectName": "JAVA PROGRAMMING LANGUAGE_7a4df31b"
+    },
+    {
+      "type": "java",
+      "name": "_39_TrappingRain",
+      "request": "launch",
+      "mainClass": "_39_TrappingRain",
+      "projectName": "JAVA PROGRAMMING LANGUAGE_7a4df31b"
+    },
+    {
+      "type": "java",
+      "name": "_36_subarraysumBrute",
+      "request": "launch",
+      "mainClass": "_36_subarraysumBrute",
+      "projectName": "JAVA PROGRAMMING LANGUAGE_7a4df31b"
+    },
+    {
+      "type": "java",
+      "name": "_37_subarraysumPrefix",
+      "request": "launch",
+      "mainClass": "_37_subarraysumPrefix",
+      "projectName": "JAVA PROGRAMMING LANGUAGE_7a4df31b"
+    },
+    {
+      "type": "java",
+      "name": "_35_subarray",
+      "request": "launch",
+      "mainClass": "_35_subarray",
+      "projectName": "JAVA PROGRAMMING LANGUAGE_7a4df31b"
+    },
+    {
+      "type": "java",
+      "name": "_34_pairsinarray",
+      "request": "launch",
+      "mainClass": "_34_pairsinarray",
+      "projectName": "JAVA PROGRAMMING LANGUAGE_7a4df31b"
+    },
+    {
+      "type": "java",
+      "name": "_123_queueLinkList",
+      "request": "launch",
+      "mainClass": "_123_queueLinkList",
+      "projectName": "JAVA PROGRAMMING LANGUAGE_7a4df31b"
+    },
+    {
+      "type": "java",
+      "name": "_120_duplicateparenth",
+      "request": "launch",
+      "mainClass": "_120_duplicateparenth",
+      "projectName": "JAVA PROGRAMMING LANGUAGE_7a4df31b"
+    },
+    {
+      "type": "java",
+      "name": "_116_reverseStack",
+      "request": "launch",
+      "mainClass": "_116_reverseStack",
+      "projectName": "JAVA PROGRAMMING LANGUAGE_7a4df31b"
+    },
+    {
+      "type": "java",
+      "name": "_115_revStack",
+      "request": "launch",
+      "mainClass": "_115_revStack",
+      "projectName": "JAVA PROGRAMMING LANGUAGE_7a4df31b"
+    },
+    {
+      "type": "java",
+      "name": "_112_stacks",
+      "request": "launch",
+      "mainClass": "_112_stacks",
+      "projectName": "JAVA PROGRAMMING LANGUAGE_7a4df31b"
+    },
+    {
+      "type": "java",
+      "name": "Solution",
+      "request": "launch",
+      "mainClass": "Solution",
+      "projectName": "JAVA PROGRAMMING LANGUAGE_7a4df31b"
+    },
+    {
+      "type": "java",
+      "name": "_110_mergesortLL",
+      "request": "launch",
+      "mainClass": "_110_mergesortLL",
+      "projectName": "JAVA PROGRAMMING LANGUAGE_7a4df31b"
+    },
+    {
+      "type": "java",
+      "name": "_107_rotatedArraylst",
+      "request": "launch",
+      "mainClass": "_107_rotatedArraylst",
+      "projectName": "JAVA PROGRAMMING LANGUAGE_7a4df31b"
+    },
+    {
+      "type": "java",
+      "name": "_106_containerWater",
+      "request": "launch",
+      "mainClass": "_106_containerWater",
+      "projectName": "JAVA PROGRAMMING LANGUAGE_7a4df31b"
+    },
+    {
+      "type": "java",
+      "name": "_105_multiDim",
+      "request": "launch",
+      "mainClass": "_105_multiDim",
+      "projectName": "JAVA PROGRAMMING LANGUAGE_7a4df31b"
+    },
+    {
+      "type": "java",
+      "name": "_104_arraylistqs",
+      "request": "launch",
+      "mainClass": "_104_arraylistqs",
+      "projectName": "JAVA PROGRAMMING LANGUAGE_7a4df31b"
+    },
+    {
+      "type": "java",
+      "name": "_103_ArrayList",
+      "request": "launch",
+      "mainClass": "_103_ArrayList",
+      "projectName": "JAVA PROGRAMMING LANGUAGE_7a4df31b"
+    },
+    {
+      "type": "java",
+      "name": "_186_LongestWord",
+      "request": "launch",
+      "mainClass": "_186_LongestWord",
+      "projectName": "JAVA PROGRAMMING LANGUAGE_7a4df31b"
+    },
+    {
+      "type": "java",
+      "name": "_185_uniqueSubstring",
+      "request": "launch",
+      "mainClass": "_185_uniqueSubstring",
+      "projectName": "JAVA PROGRAMMING LANGUAGE_7a4df31b"
+    },
+    {
+      "type": "java",
+      "name": "_184_startswith",
+      "request": "launch",
+      "mainClass": "_184_startswith",
+      "projectName": "JAVA PROGRAMMING LANGUAGE_7a4df31b"
+    },
+    {
+      "type": "java",
+      "name": "_183_prefixPrblmTries",
+      "request": "launch",
+      "mainClass": "_183_prefixPrblmTries",
+      "projectName": "JAVA PROGRAMMING LANGUAGE_7a4df31b"
+    },
+    {
+      "type": "java",
+      "name": "_182_Tries",
+      "request": "launch",
+      "mainClass": "_182_Tries",
+      "projectName": "JAVA PROGRAMMING LANGUAGE_7a4df31b"
+    },
+    {
+      "type": "java",
+      "name": "_181_SubarraySumEqToK",
+      "request": "launch",
+      "mainClass": "_181_SubarraySumEqToK",
+      "projectName": "JAVA PROGRAMMING LANGUAGE_7a4df31b"
+    },
+    {
+      "type": "java",
+      "name": "_173_treemp",
+      "request": "launch",
+      "mainClass": "_173_treemp",
+      "projectName": "JAVA PROGRAMMING LANGUAGE_7a4df31b"
+    },
+    {
+      "type": "java",
+      "name": "_180_LargestSubarrSum0",
+      "request": "launch",
+      "mainClass": "_180_LargestSubarrSum0",
+      "projectName": "JAVA PROGRAMMING LANGUAGE_7a4df31b"
+    },
+    {
+      "type": "java",
+      "name": "_179_ItineraryTickets",
+      "request": "launch",
+      "mainClass": "_179_ItineraryTickets",
+      "projectName": "JAVA PROGRAMMING LANGUAGE_7a4df31b"
+    },
+    {
+      "type": "java",
+      "name": "_178_UnionIntersction",
+      "request": "launch",
+      "mainClass": "_178_UnionIntersction",
+      "projectName": "JAVA PROGRAMMING LANGUAGE_7a4df31b"
+    },
+    {
+      "type": "java",
+      "name": "_177_CountDistnctElmnts",
+      "request": "launch",
+      "mainClass": "_177_CountDistnctElmnts",
+      "projectName": "JAVA PROGRAMMING LANGUAGE_7a4df31b"
+    },
+    {
+      "type": "java",
+      "name": "_176_HashLinkedhsTreehs",
+      "request": "launch",
+      "mainClass": "_176_HashLinkedhsTreehs",
+      "projectName": "JAVA PROGRAMMING LANGUAGE_7a4df31b"
+    },
+    {
+      "type": "java",
+      "name": "_176_HashSet",
+      "request": "launch",
+      "mainClass": "_176_HashSet",
+      "projectName": "JAVA PROGRAMMING LANGUAGE_7a4df31b"
+    },
+    {
+      "type": "java",
+      "name": "_175_ValidAnagram",
+      "request": "launch",
+      "mainClass": "_175_ValidAnagram",
+      "projectName": "JAVA PROGRAMMING LANGUAGE_7a4df31b"
+    },
+    {
+      "type": "java",
+      "name": "_174_MajorityElmnt",
+      "request": "launch",
+      "mainClass": "_174_MajorityElmnt",
+      "projectName": "JAVA PROGRAMMING LANGUAGE_7a4df31b"
+    },
+    {
+      "type": "java",
+      "name": "_170_HashMap",
+      "request": "launch",
+      "mainClass": "_170_HashMap",
+      "projectName": "JAVA PROGRAMMING LANGUAGE_7a4df31b"
+    },
+    {
+      "type": "java",
+      "name": "_173_TreeMap",
+      "request": "launch",
+      "mainClass": "_173_TreeMap",
+      "projectName": "JAVA PROGRAMMING LANGUAGE_7a4df31b"
+    },
+    {
+      "type": "java",
+      "name": "_172_LinkedHashMap",
+      "request": "launch",
+      "mainClass": "_172_LinkedHashMap",
+      "projectName": "JAVA PROGRAMMING LANGUAGE_7a4df31b"
+    },
+    {
+      "type": "java",
+      "name": "_171_hashmapImplmtatn",
+      "request": "launch",
+      "mainClass": "_171_hashmapImplmtatn",
+      "projectName": "JAVA PROGRAMMING LANGUAGE_7a4df31b"
+    },
+    {
+      "type": "java",
+      "name": "rough",
+      "request": "launch",
+      "mainClass": "rough",
+      "projectName": "JAVA PROGRAMMING LANGUAGE_7a4df31b"
+    },
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "cppdbg",
+      "request": "launch",
+      "args": [],
+      "stopAtEntry": false,
+      "externalConsole": true,
+      "cwd": "c:/Users/mirsa/OneDrive/Documents/APNA COLLAGE/JAVA PROGRAMMING LANGUAGE",
+      "program": "c:/Users/mirsa/OneDrive/Documents/APNA COLLAGE/JAVA PROGRAMMING LANGUAGE/build/Debug/outDebug",
+      "MIMode": "gdb",
+      "miDebuggerPath": "gdb",
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        }
+      ]
+    }
+  ]
+}

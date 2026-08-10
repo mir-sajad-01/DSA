@@ -1,0 +1,1742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Deep Learning — Basics to Advanced Complete Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Serif:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#07090f;
+  --surf1:#0e1119;
+  --surf2:#151b27;
+  --surf3:#1c2333;
+  --border:rgba(255,255,255,0.07);
+  --border2:rgba(255,255,255,0.13);
+  --border3:rgba(255,255,255,0.2);
+  --text:#dde1ed;
+  --text2:#9aa0b4;
+  --text3:#6b7289;
+  --blue:#5b8df0;
+  --blue2:#3a6fdd;
+  --purple:#8b6cf7;
+  --teal:#22d3c8;
+  --green:#3dd68c;
+  --amber:#f5a623;
+  --red:#f06565;
+  --pink:#e879a0;
+  --cyan:#38bdf8;
+  --white:#f0f2f9;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'IBM Plex Sans',sans-serif;background:var(--bg);color:var(--text);line-height:1.75;font-size:15px;overflow-x:hidden;}
+::-webkit-scrollbar{width:6px;background:var(--surf1);}
+::-webkit-scrollbar-thumb{background:var(--surf3);border-radius:3px;}
+
+/* ── HERO ── */
+.hero{
+  min-height:280px;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(91,141,240,0.18) 0%,transparent 60%),
+             radial-gradient(ellipse 50% 40% at 80% 80%,rgba(139,108,247,0.12) 0%,transparent 50%),
+             var(--bg);
+  border-bottom:1px solid var(--border2);padding:60px 24px 50px;text-align:center;
+}
+.hero-tag{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--blue);font-weight:600;margin-bottom:16px;
+  border:1px solid rgba(91,141,240,0.3);padding:4px 14px;border-radius:100px;display:inline-block;background:rgba(91,141,240,0.08);}
+.hero h1{font-size:44px;font-weight:700;line-height:1.15;margin-bottom:12px;
+  background:linear-gradient(135deg,#7eb0ff 0%,#a78bfa 45%,#22d3c8 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.hero p{color:var(--text2);font-size:16px;max-width:600px;}
+
+/* ── SIDEBAR + LAYOUT ── */
+.shell{display:flex;min-height:calc(100vh - 280px);}
+.sidebar{
+  width:260px;flex-shrink:0;position:sticky;top:0;height:100vh;overflow-y:auto;
+  background:var(--surf1);border-right:1px solid var(--border2);padding:20px 0;
+}
+.sidebar-title{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--text3);
+  padding:0 18px;margin-bottom:10px;font-weight:600;}
+.nav-item{
+  display:flex;align-items:center;gap:10px;padding:8px 18px;
+  cursor:pointer;transition:all 0.18s;font-size:13px;color:var(--text2);
+  border-left:2px solid transparent;text-decoration:none;
+}
+.nav-item:hover{color:var(--blue);background:rgba(91,141,240,0.06);border-left-color:var(--blue);}
+.nav-item.active{color:var(--blue);background:rgba(91,141,240,0.09);border-left-color:var(--blue);}
+.nav-num{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--text3);min-width:20px;}
+.nav-sep{height:1px;background:var(--border);margin:10px 18px;}
+.content{flex:1;min-width:0;padding:40px 48px 80px;}
+
+/* ── SECTIONS ── */
+.section{margin-bottom:60px;scroll-margin-top:24px;}
+.section-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--surf2);border:1px solid var(--border2);
+  border-radius:100px;padding:5px 14px 5px 8px;
+  margin-bottom:18px;
+}
+.section-badge .num{
+  width:22px;height:22px;border-radius:50%;
+  background:linear-gradient(135deg,var(--blue),var(--purple));
+  font-size:11px;font-weight:700;color:white;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'IBM Plex Mono',monospace;
+}
+.section-badge span{font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--blue);}
+.section h2{font-size:30px;font-weight:700;color:var(--white);margin-bottom:8px;line-height:1.2;}
+.section .tagline{font-size:15px;color:var(--text2);margin-bottom:28px;border-bottom:1px solid var(--border);padding-bottom:20px;}
+
+h3{font-size:18px;font-weight:600;color:var(--cyan);margin:28px 0 12px;
+  display:flex;align-items:center;gap:10px;}
+h3::before{content:'';display:block;width:4px;height:18px;background:var(--cyan);border-radius:2px;flex-shrink:0;}
+h4{font-size:15px;font-weight:600;color:var(--amber);margin:20px 0 8px;}
+p{color:var(--text2);margin-bottom:12px;line-height:1.8;}
+strong{color:var(--white);}
+em{color:var(--teal);font-style:normal;}
+
+/* ── BOXES ── */
+.box{border-radius:14px;padding:18px 22px;margin:16px 0;border:1px solid var(--border);}
+.box .box-label{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;}
+.box.blue{background:rgba(91,141,240,0.07);border-color:rgba(91,141,240,0.25);}
+.box.blue .box-label{color:var(--blue);}
+.box.green{background:rgba(61,214,140,0.07);border-color:rgba(61,214,140,0.22);}
+.box.green .box-label{color:var(--green);}
+.box.amber{background:rgba(245,166,35,0.07);border-color:rgba(245,166,35,0.22);}
+.box.amber .box-label{color:var(--amber);}
+.box.red{background:rgba(240,101,101,0.07);border-color:rgba(240,101,101,0.22);}
+.box.red .box-label{color:var(--red);}
+.box.purple{background:rgba(139,108,247,0.07);border-color:rgba(139,108,247,0.22);}
+.box.purple .box-label{color:var(--purple);}
+.box.teal{background:rgba(34,211,200,0.07);border-color:rgba(34,211,200,0.22);}
+.box.teal .box-label{color:var(--teal);}
+.box.pink{background:rgba(232,121,160,0.07);border-color:rgba(232,121,160,0.22);}
+.box.pink .box-label{color:var(--pink);}
+.box p{margin:0;font-size:14px;color:var(--text2);}
+.box ul{color:var(--text2);padding-left:18px;font-size:14px;}
+.box li{margin-bottom:5px;}
+
+/* ── FORMULA ── */
+.formula{
+  background:#050710;border:1px solid rgba(91,141,240,0.3);border-radius:12px;
+  padding:14px 24px;margin:14px 0;text-align:center;overflow-x:auto;
+  font-family:'IBM Plex Mono',monospace;font-size:14px;color:var(--amber);letter-spacing:0.3px;
+}
+
+/* ── CODE BLOCK ── */
+.code-block{
+  background:#040610;border:1px solid var(--border2);border-radius:12px;
+  padding:16px 20px;margin:14px 0;overflow-x:auto;
+  font-family:'IBM Plex Mono',monospace;font-size:13px;color:#a8d8b8;line-height:1.8;
+}
+.code-block .c{color:#5c6a8a;} /* comment */
+.code-block .k{color:#c792ea;} /* keyword */
+.code-block .s{color:#c3e88d;} /* string */
+.code-block .n{color:#82aaff;} /* number */
+.code-block .f{color:#89ddff;} /* function */
+
+/* ── TABLE ── */
+table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13.5px;}
+th{background:var(--surf2);color:var(--blue);font-weight:600;padding:10px 14px;
+   text-align:left;border:1px solid var(--border2);font-size:11.5px;text-transform:uppercase;letter-spacing:0.5px;}
+td{padding:10px 14px;border:1px solid var(--border);color:var(--text2);vertical-align:top;}
+tr:hover td{background:rgba(255,255,255,0.015);}
+
+/* ── GRID ── */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:16px 0;}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:16px 0;}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:16px 0;}
+.card{background:var(--surf2);border:1px solid var(--border);border-radius:14px;padding:16px 18px;}
+.card h5{font-size:13px;font-weight:600;margin-bottom:8px;}
+.card p{font-size:12.5px;color:var(--text3);margin:0;}
+
+/* ── DIAGRAM ── */
+.diagram{
+  background:#040810;border:1px solid var(--border2);border-radius:14px;
+  padding:22px 24px;margin:18px 0;overflow-x:auto;
+  font-family:'IBM Plex Mono',monospace;font-size:12.5px;line-height:2;color:var(--text3);
+  white-space:pre;
+}
+.diagram .dn{color:var(--blue);font-weight:700;}
+.diagram .da{color:var(--text3);}
+.diagram .dl{color:var(--green);font-weight:600;}
+.diagram .dh{color:var(--amber);}
+
+/* ── STEP LIST ── */
+.steps{list-style:none;padding:0;margin:14px 0;counter-reset:step;}
+.steps li{
+  counter-increment:step;padding:12px 16px 12px 52px;position:relative;
+  background:var(--surf2);border:1px solid var(--border);border-radius:12px;margin-bottom:8px;
+  font-size:14px;color:var(--text2);
+}
+.steps li::before{
+  content:counter(step);position:absolute;left:14px;top:12px;
+  width:24px;height:24px;border-radius:50%;
+  background:linear-gradient(135deg,var(--blue),var(--purple));
+  color:white;font-size:12px;font-weight:700;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'IBM Plex Mono',monospace;
+}
+
+/* ── BADGE ── */
+.badge{display:inline-block;padding:3px 10px;border-radius:100px;font-size:11.5px;font-weight:600;margin:2px;}
+.bb{background:rgba(91,141,240,0.13);color:var(--blue);border:1px solid rgba(91,141,240,0.28);}
+.bg{background:rgba(61,214,140,0.11);color:var(--green);border:1px solid rgba(61,214,140,0.25);}
+.ba{background:rgba(245,166,35,0.11);color:var(--amber);border:1px solid rgba(245,166,35,0.25);}
+.br{background:rgba(240,101,101,0.11);color:var(--red);border:1px solid rgba(240,101,101,0.25);}
+.bt{background:rgba(34,211,200,0.11);color:var(--teal);border:1px solid rgba(34,211,200,0.25);}
+.bp{background:rgba(139,108,247,0.11);color:var(--purple);border:1px solid rgba(139,108,247,0.25);}
+
+/* ── COMPARISON BAR ── */
+.cmp-bar{display:flex;align-items:center;gap:12px;margin:6px 0;font-size:13px;}
+.cmp-label{min-width:130px;color:var(--text2);}
+.cmp-track{flex:1;height:8px;background:var(--surf3);border-radius:100px;overflow:hidden;}
+.cmp-fill{height:100%;border-radius:100px;}
+
+/* ── PERCEPTRON SVG ── */
+.svg-wrap{background:#040810;border:1px solid var(--border2);border-radius:14px;padding:20px;margin:18px 0;overflow-x:auto;}
+.svg-wrap svg{display:block;margin:auto;}
+
+/* ── LAYER VIS ── */
+.layer-row{display:flex;align-items:center;gap:6px;margin:18px 0;flex-wrap:wrap;}
+.layer-pill{border-radius:10px;padding:10px 14px;text-align:center;font-size:12px;font-weight:600;flex-shrink:0;}
+.arr{color:var(--text3);font-size:16px;padding:0 2px;}
+
+/* ── MCQ ── */
+.mcq-hero{
+  background:linear-gradient(135deg,rgba(91,141,240,0.12),rgba(139,108,247,0.08));
+  border:1px solid rgba(91,141,240,0.25);border-radius:18px;
+  padding:32px;text-align:center;margin-bottom:32px;
+}
+.mcq-hero h2{font-size:28px;font-weight:700;
+  background:linear-gradient(135deg,var(--amber),var(--pink));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:6px;}
+.score-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px;}
+.sc-cell{background:var(--surf1);border:1px solid var(--border2);border-radius:12px;padding:14px;text-align:center;}
+.sc-cell .v{font-size:28px;font-weight:700;font-family:'IBM Plex Mono',monospace;color:var(--blue);}
+.sc-cell .l{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:1px;margin-top:2px;}
+.prog-bar{height:8px;background:var(--surf3);border-radius:100px;overflow:hidden;margin-bottom:4px;}
+.prog-fill{height:100%;border-radius:100px;background:linear-gradient(90deg,var(--blue),var(--teal));transition:width 0.6s ease;width:0%;}
+
+.qb{background:var(--surf1);border:1px solid var(--border);border-radius:16px;padding:22px 24px;margin-bottom:16px;transition:border-color 0.2s;}
+.qb.ok{border-color:var(--green);}
+.qb.ng{border-color:var(--red);}
+.qb .qtag{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text3);margin-bottom:8px;}
+.qb .qtxt{font-size:15px;font-weight:500;color:var(--white);margin-bottom:16px;line-height:1.5;}
+.opts-grid{display:grid;gap:7px;}
+.opt{
+  display:flex;align-items:center;gap:12px;padding:10px 15px;
+  background:var(--surf2);border:1px solid var(--border);border-radius:10px;
+  cursor:pointer;transition:all 0.15s;font-size:14px;color:var(--text2);
+}
+.opt:hover{border-color:var(--blue);background:rgba(91,141,240,0.07);}
+.opt .ok{
+  width:22px;height:22px;border-radius:6px;font-family:'IBM Plex Mono',monospace;
+  font-size:11px;font-weight:700;color:var(--blue);
+  background:var(--surf3);border:1px solid var(--border2);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.opt.ca{background:rgba(61,214,140,0.1);border-color:var(--green);color:var(--green);}
+.opt.ca .ok{background:rgba(61,214,140,0.2);border-color:var(--green);color:var(--green);}
+.opt.wa{background:rgba(240,101,101,0.08);border-color:var(--red);color:var(--red);}
+.opt.wa .ok{background:rgba(240,101,101,0.15);border-color:var(--red);color:var(--red);}
+.opt.dis{pointer-events:none;}
+.expl{margin-top:10px;padding:11px 15px;background:rgba(91,141,240,0.06);
+  border-left:3px solid var(--blue);border-radius:0 8px 8px 0;
+  font-size:13px;color:var(--text2);display:none;}
+.expl.show{display:block;}
+.btn-reset{
+  display:block;width:100%;padding:14px;background:transparent;
+  color:var(--text3);border:1px solid var(--border2);border-radius:12px;
+  font-size:14px;cursor:pointer;font-family:'IBM Plex Sans',sans-serif;
+  margin-top:10px;transition:all 0.2s;
+}
+.btn-reset:hover{color:var(--white);border-color:var(--border3);}
+
+@media(max-width:768px){
+  .shell{flex-direction:column;}
+  .sidebar{width:100%;height:auto;position:relative;border-right:none;border-bottom:1px solid var(--border2);}
+  .content{padding:24px 18px 60px;}
+  .g2,.g3,.g4{grid-template-columns:1fr;}
+  .hero h1{font-size:28px;}
+  .score-row{grid-template-columns:repeat(2,1fr);}
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-tag">📖 Complete Study Guide · Basics to Advanced</div>
+  <h1>Deep Learning — Full Exam Prep</h1>
+  <p>Every concept explained from scratch · Diagrams · Formulas · 50 Interactive MCQs</p>
+</div>
+
+<div class="shell">
+
+<!-- SIDEBAR -->
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-title">Contents</div>
+
+  <div class="nav-item" onclick="goto('s0')"><span class="nav-num">00</span>AI → ML → DL Hierarchy</div>
+  <div class="nav-item" onclick="goto('s1')"><span class="nav-num">01</span>Biological Neuron</div>
+  <div class="nav-item" onclick="goto('s2')"><span class="nav-num">02</span>Perceptron (basics)</div>
+  <div class="nav-item" onclick="goto('s3')"><span class="nav-num">03</span>MLP — Multi-Layer</div>
+  <div class="nav-item" onclick="goto('s4')"><span class="nav-num">04</span>ANN Architecture</div>
+  <div class="nav-item" onclick="goto('s5')"><span class="nav-num">05</span>Forward Pass</div>
+  <div class="nav-item" onclick="goto('s6')"><span class="nav-num">06</span>Backpropagation</div>
+  <div class="nav-item" onclick="goto('s7')"><span class="nav-num">07</span>Activation Functions</div>
+  <div class="nav-item" onclick="goto('s8')"><span class="nav-num">08</span>Loss Functions</div>
+  <div class="nav-item" onclick="goto('s9')"><span class="nav-num">09</span>Optimizers</div>
+  <div class="nav-item" onclick="goto('s10')"><span class="nav-num">10</span>Overfitting & Regularization</div>
+  <div class="nav-item" onclick="goto('s11')"><span class="nav-num">11</span>Curse of Dimensionality</div>
+  <div class="nav-item" onclick="goto('s12')"><span class="nav-num">12</span>CNN — Deep Dive</div>
+  <div class="nav-item" onclick="goto('s13')"><span class="nav-num">13</span>LeNet, AlexNet, VGG, ResNet</div>
+  <div class="nav-item" onclick="goto('s14')"><span class="nav-num">14</span>RNN — Sequences</div>
+  <div class="nav-item" onclick="goto('s15')"><span class="nav-num">15</span>LSTM & GRU</div>
+  <div class="nav-item" onclick="goto('s16')"><span class="nav-num">16</span>Bidirectional RNN</div>
+  <div class="nav-item" onclick="goto('s17')"><span class="nav-num">17</span>NLP Pipeline</div>
+  <div class="nav-sep"></div>
+  <div class="nav-item" onclick="goto('mcq')" style="color:var(--amber)"><span class="nav-num">⭐</span>50 MCQ Practice Test</div>
+</nav>
+
+<!-- MAIN CONTENT -->
+<main class="content">
+
+<!-- ══════════════════════════════ SECTION 0 ══════════════════════════════ -->
+<div class="section" id="s0">
+  <div class="section-badge"><div class="num">0</div><span>Foundation</span></div>
+  <h2>AI → Machine Learning → Deep Learning</h2>
+  <p class="tagline">Before diving into neurons and math, understand where Deep Learning fits in the bigger picture.</p>
+
+  <h3>The Three Circles</h3>
+  <p>Think of these as three nested circles, each one a subset of the previous:</p>
+
+  <div class="svg-wrap">
+  <svg viewBox="0 0 600 280" width="100%" style="max-width:600px">
+    <ellipse cx="300" cy="140" rx="280" ry="120" fill="rgba(91,141,240,0.08)" stroke="rgba(91,141,240,0.4)" stroke-width="1.5"/>
+    <ellipse cx="300" cy="150" rx="190" ry="82" fill="rgba(139,108,247,0.10)" stroke="rgba(139,108,247,0.45)" stroke-width="1.5"/>
+    <ellipse cx="300" cy="160" rx="105" ry="48" fill="rgba(34,211,200,0.13)" stroke="rgba(34,211,200,0.5)" stroke-width="1.5"/>
+    <text x="300" y="165" text-anchor="middle" font-family="IBM Plex Sans" font-size="14" font-weight="700" fill="#22d3c8">Deep Learning</text>
+    <text x="300" y="220" text-anchor="middle" font-family="IBM Plex Sans" font-size="13" font-weight="600" fill="#a78bfa">Machine Learning</text>
+    <text x="300" y="66" text-anchor="middle" font-family="IBM Plex Sans" font-size="13" font-weight="600" fill="#7eb0ff">Artificial Intelligence</text>
+    <text x="80" y="150" font-family="IBM Plex Sans" font-size="11" fill="#5c6a8a">Rule-based systems</text>
+    <text x="80" y="165" font-family="IBM Plex Sans" font-size="11" fill="#5c6a8a">Expert systems</text>
+    <text x="380" y="220" font-family="IBM Plex Sans" font-size="11" fill="#6b7289">Decision Trees</text>
+    <text x="380" y="233" font-family="IBM Plex Sans" font-size="11" fill="#6b7289">SVM, k-NN</text>
+  </svg>
+  </div>
+
+  <div class="g3">
+    <div class="card" style="border-color:rgba(91,141,240,0.3)">
+      <h5 style="color:var(--blue)">🤖 Artificial Intelligence (1950s)</h5>
+      <p>Any technique that enables machines to <strong>mimic human intelligence</strong>. Includes rule-based systems, expert systems, search algorithms. Broad field.</p>
+    </div>
+    <div class="card" style="border-color:rgba(139,108,247,0.3)">
+      <h5 style="color:var(--purple)">📊 Machine Learning (1980s)</h5>
+      <p>AI systems that <strong>learn from data</strong> without being explicitly programmed. Algorithms find patterns. Examples: Linear Regression, SVM, Decision Trees.</p>
+    </div>
+    <div class="card" style="border-color:rgba(34,211,200,0.3)">
+      <h5 style="color:var(--teal)">🧠 Deep Learning (2010s)</h5>
+      <p>ML using <strong>deep neural networks</strong> (many layers). Automatically learns features. Requires large data + GPU. Powers image recognition, ChatGPT, etc.</p>
+    </div>
+  </div>
+
+  <h3>Why Deep Learning NOW?</h3>
+  <table>
+    <tr><th>Factor</th><th>Before 2012</th><th>After 2012</th></tr>
+    <tr><td>Data</td><td>Thousands of samples</td><td>Millions/Billions (Internet, sensors)</td></tr>
+    <tr><td>Hardware</td><td>CPUs only</td><td>GPUs (1000× faster parallel computation)</td></tr>
+    <tr><td>Algorithms</td><td>Shallow networks, poor training</td><td>Better activations (ReLU), Dropout, BatchNorm</td></tr>
+    <tr><td>Frameworks</td><td>Custom C++ code</td><td>TensorFlow, PyTorch — easy experimentation</td></tr>
+  </table>
+</div>
+
+<!-- ══════════════════════════════ SECTION 1 ══════════════════════════════ -->
+<div class="section" id="s1">
+  <div class="section-badge"><div class="num">1</div><span>Biology → Math</span></div>
+  <h2>The Biological Neuron — Inspiration</h2>
+  <p class="tagline">Deep Learning is loosely inspired by how the human brain processes information. Understanding biology helps understand the math.</p>
+
+  <h3>How a Biological Neuron Works</h3>
+  <div class="svg-wrap">
+  <svg viewBox="0 0 650 200" width="100%" style="max-width:650px">
+    <!-- Dendrites -->
+    <line x1="60" y1="80" x2="160" y2="100" stroke="#5b8df0" stroke-width="2"/>
+    <line x1="60" y1="100" x2="160" y2="100" stroke="#5b8df0" stroke-width="2"/>
+    <line x1="60" y1="120" x2="160" y2="100" stroke="#5b8df0" stroke-width="2"/>
+    <line x1="30" y1="60" x2="60" y2="80" stroke="#5b8df0" stroke-width="1.5"/>
+    <line x1="30" y1="100" x2="60" y2="100" stroke="#5b8df0" stroke-width="1.5"/>
+    <line x1="30" y1="130" x2="60" y2="120" stroke="#5b8df0" stroke-width="1.5"/>
+    <text x="10" y="58" font-family="IBM Plex Sans" font-size="10" fill="#5b8df0">DENDRITES</text>
+    <text x="8" y="70" font-family="IBM Plex Sans" font-size="10" fill="#6b7289">(Receive signals)</text>
+    <!-- Cell body -->
+    <ellipse cx="200" cy="100" rx="42" ry="38" fill="rgba(139,108,247,0.2)" stroke="#8b6cf7" stroke-width="2"/>
+    <text x="200" y="97" text-anchor="middle" font-family="IBM Plex Sans" font-size="11" font-weight="700" fill="#a78bfa">CELL</text>
+    <text x="200" y="110" text-anchor="middle" font-family="IBM Plex Sans" font-size="11" font-weight="700" fill="#a78bfa">BODY</text>
+    <!-- Axon hillock -->
+    <rect x="242" y="93" width="38" height="14" rx="7" fill="rgba(245,166,35,0.2)" stroke="#f5a623" stroke-width="1.5"/>
+    <text x="261" y="104" text-anchor="middle" font-family="IBM Plex Sans" font-size="9" fill="#f5a623">Threshold</text>
+    <!-- Axon -->
+    <line x1="280" y1="100" x2="430" y2="100" stroke="#22d3c8" stroke-width="2.5"/>
+    <text x="340" y="88" text-anchor="middle" font-family="IBM Plex Sans" font-size="10" fill="#22d3c8">AXON</text>
+    <!-- Terminals -->
+    <line x1="430" y1="100" x2="510" y2="70" stroke="#3dd68c" stroke-width="1.8"/>
+    <line x1="430" y1="100" x2="510" y2="100" stroke="#3dd68c" stroke-width="1.8"/>
+    <line x1="430" y1="100" x2="510" y2="130" stroke="#3dd68c" stroke-width="1.8"/>
+    <circle cx="520" cy="70" r="8" fill="rgba(61,214,140,0.2)" stroke="#3dd68c" stroke-width="1.5"/>
+    <circle cx="520" cy="100" r="8" fill="rgba(61,214,140,0.2)" stroke="#3dd68c" stroke-width="1.5"/>
+    <circle cx="520" cy="130" r="8" fill="rgba(61,214,140,0.2)" stroke="#3dd68c" stroke-width="1.5"/>
+    <text x="545" y="73" font-family="IBM Plex Sans" font-size="10" fill="#3dd68c">SYNAPSE</text>
+    <text x="545" y="83" font-family="IBM Plex Sans" font-size="9" fill="#6b7289">(Send signals)</text>
+  </svg>
+  </div>
+
+  <h3>Biological → Artificial Mapping</h3>
+  <table>
+    <tr><th>Biological Part</th><th>Function</th><th>Artificial Equivalent</th></tr>
+    <tr><td>Dendrites</td><td>Receive electrical signals from other neurons</td><td>Input values (x₁, x₂, ... xₙ)</td></tr>
+    <tr><td>Synapse strength</td><td>How strong the connection is between neurons</td><td>Weights (w₁, w₂, ... wₙ)</td></tr>
+    <tr><td>Cell Body (Soma)</td><td>Integrates all incoming signals + threshold</td><td>Weighted sum + bias: Σ(wᵢxᵢ) + b</td></tr>
+    <tr><td>Axon Hillock</td><td>Fires if signal exceeds threshold</td><td>Activation function f(z)</td></tr>
+    <tr><td>Axon</td><td>Carries output signal away</td><td>Output value ŷ</td></tr>
+    <tr><td>Synaptic terminals</td><td>Connect to next neuron's dendrites</td><td>Output passed to next layer</td></tr>
+  </table>
+
+  <div class="box blue">
+    <div class="box-label">Key Insight</div>
+    <p>The human brain has ~86 billion neurons, each connected to ~10,000 others. Deep learning networks are millions of times simpler but use the same core idea: many simple processing units connected together can solve incredibly complex problems.</p>
+  </div>
+</div>
+
+<!-- ══════════════════════════════ SECTION 2 ══════════════════════════════ -->
+<div class="section" id="s2">
+  <div class="section-badge"><div class="num">2</div><span>Core Concept</span></div>
+  <h2>The Perceptron — Complete Understanding</h2>
+  <p class="tagline">The perceptron is the atomic building block of all neural networks. Master this and everything else follows.</p>
+
+  <h3>Definition</h3>
+  <p>A <strong>Perceptron</strong> is a mathematical model of a single neuron. Invented by <strong>Frank Rosenblatt in 1958</strong>. It takes multiple numerical inputs, multiplies each by a weight (importance), sums them, adds a bias, and passes through an activation function to produce a binary output.</p>
+
+  <h3>Visual of a Single Perceptron</h3>
+  <div class="svg-wrap">
+  <svg viewBox="0 0 620 260" width="100%" style="max-width:620px">
+    <!-- Inputs -->
+    <rect x="10" y="40" width="80" height="32" rx="8" fill="rgba(91,141,240,0.15)" stroke="#5b8df0" stroke-width="1.5"/>
+    <text x="50" y="61" text-anchor="middle" font-family="IBM Plex Mono" font-size="13" fill="#7eb0ff">x₁ = 0.8</text>
+    <rect x="10" y="114" width="80" height="32" rx="8" fill="rgba(91,141,240,0.15)" stroke="#5b8df0" stroke-width="1.5"/>
+    <text x="50" y="135" text-anchor="middle" font-family="IBM Plex Mono" font-size="13" fill="#7eb0ff">x₂ = 0.5</text>
+    <rect x="10" y="188" width="80" height="32" rx="8" fill="rgba(91,141,240,0.15)" stroke="#5b8df0" stroke-width="1.5"/>
+    <text x="50" y="209" text-anchor="middle" font-family="IBM Plex Mono" font-size="13" fill="#7eb0ff">x₃ = 0.3</text>
+    <!-- Connections with weights -->
+    <line x1="90" y1="56" x2="230" y2="128" stroke="#5b8df0" stroke-width="2"/>
+    <line x1="90" y1="130" x2="230" y2="132" stroke="#5b8df0" stroke-width="2"/>
+    <line x1="90" y1="204" x2="230" y2="136" stroke="#5b8df0" stroke-width="2"/>
+    <!-- Weight labels -->
+    <rect x="115" y="72" width="72" height="20" rx="10" fill="rgba(245,166,35,0.15)" stroke="rgba(245,166,35,0.4)" stroke-width="1"/>
+    <text x="151" y="86" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#f5a623">w₁ = 0.6</text>
+    <rect x="115" y="118" width="72" height="20" rx="10" fill="rgba(245,166,35,0.15)" stroke="rgba(245,166,35,0.4)" stroke-width="1"/>
+    <text x="151" y="132" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#f5a623">w₂ = 0.4</text>
+    <rect x="115" y="164" width="72" height="20" rx="10" fill="rgba(245,166,35,0.15)" stroke="rgba(245,166,35,0.4)" stroke-width="1"/>
+    <text x="151" y="178" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#f5a623">w₃ = 0.2</text>
+    <!-- Neuron body (summation) -->
+    <circle cx="275" cy="130" r="45" fill="rgba(139,108,247,0.2)" stroke="#8b6cf7" stroke-width="2"/>
+    <text x="275" y="122" text-anchor="middle" font-family="IBM Plex Sans" font-size="12" font-weight="600" fill="#c4b5fd">Σ + bias</text>
+    <text x="275" y="137" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#9f8dcc">z = 0.82</text>
+    <!-- Bias -->
+    <rect x="248" y="20" width="54" height="26" rx="8" fill="rgba(61,214,140,0.12)" stroke="rgba(61,214,140,0.35)" stroke-width="1.5"/>
+    <text x="275" y="38" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#3dd68c">b = 0.1</text>
+    <line x1="275" y1="46" x2="275" y2="85" stroke="rgba(61,214,140,0.5)" stroke-width="1.5" stroke-dasharray="3,3"/>
+    <!-- Activation -->
+    <rect x="348" y="104" width="90" height="52" rx="12" fill="rgba(34,211,200,0.12)" stroke="#22d3c8" stroke-width="2"/>
+    <text x="393" y="124" text-anchor="middle" font-family="IBM Plex Sans" font-size="11" font-weight="600" fill="#22d3c8">Activation</text>
+    <text x="393" y="140" text-anchor="middle" font-family="IBM Plex Mono" font-size="12" fill="#5eead4">sigmoid</text>
+    <line x1="320" y1="130" x2="348" y2="130" stroke="#8b6cf7" stroke-width="2"/>
+    <!-- Output -->
+    <rect x="464" y="110" width="80" height="40" rx="10" fill="rgba(61,214,140,0.15)" stroke="#3dd68c" stroke-width="2"/>
+    <text x="504" y="127" text-anchor="middle" font-family="IBM Plex Sans" font-size="11" font-weight="600" fill="#3dd68c">Output</text>
+    <text x="504" y="143" text-anchor="middle" font-family="IBM Plex Mono" font-size="12" fill="#4ade80">ŷ = 0.69</text>
+    <line x1="438" y1="130" x2="464" y2="130" stroke="#22d3c8" stroke-width="2"/>
+    <!-- Arrow -->
+    <polygon points="462,126 456,130 462,134" fill="#22d3c8"/>
+    <polygon points="462,126 462,134 465,130" fill="#22d3c8"/>
+  </svg>
+  </div>
+
+  <h3>The Complete Perceptron Formula</h3>
+  <div class="formula">Step 1 → z = (w₁×x₁) + (w₂×x₂) + (w₃×x₃) + b = Σ(wᵢxᵢ) + b</div>
+  <div class="formula">Step 2 → ŷ = f(z) &nbsp;&nbsp;&nbsp; [f = activation function]</div>
+
+  <h4>Worked Example (using numbers from the diagram):</h4>
+  <div class="box blue">
+    <div class="box-label">Step-by-Step Calculation</div>
+    <p>Given: x₁=0.8, x₂=0.5, x₃=0.3 · w₁=0.6, w₂=0.4, w₃=0.2 · b=0.1</p>
+    <p><strong>z</strong> = (0.6×0.8) + (0.4×0.5) + (0.2×0.3) + 0.1 = 0.48 + 0.20 + 0.06 + 0.1 = <strong>0.84</strong></p>
+    <p><strong>ŷ</strong> = sigmoid(0.84) = 1/(1+e⁻⁰·⁸⁴) = 1/(1+0.431) = <strong>0.699 ≈ 0.70</strong></p>
+    <p>Interpretation: 70% probability of class 1.</p>
+  </div>
+
+  <h3>Original Perceptron — Step Function</h3>
+  <p>Rosenblatt's original perceptron used a <strong>step function</strong> for binary decisions:</p>
+  <div class="formula">Output = 1 &nbsp;if z ≥ threshold &nbsp;&nbsp;|&nbsp;&nbsp; Output = 0 &nbsp;if z &lt; threshold</div>
+
+  <h3>Perceptron Learning Rule</h3>
+  <p>The perceptron learns by adjusting weights based on errors:</p>
+  <div class="formula">wᵢ(new) = wᵢ(old) + η × (y - ŷ) × xᵢ</div>
+  <p>Where <strong>η</strong> (learning rate, e.g. 0.01) controls how much to adjust, <strong>y</strong> is true label, <strong>ŷ</strong> is predicted label.</p>
+
+  <div class="g2">
+    <div class="box green">
+      <div class="box-label">What Perceptron CAN Solve</div>
+      <ul>
+        <li>AND gate (linearly separable)</li>
+        <li>OR gate (linearly separable)</li>
+        <li>NOT gate</li>
+        <li>Any linearly separable classification</li>
+      </ul>
+    </div>
+    <div class="box red">
+      <div class="box-label">What Perceptron CANNOT Solve</div>
+      <ul>
+        <li><strong>XOR gate</strong> (NOT linearly separable)</li>
+        <li>Any problem where classes cannot be separated by a straight line/plane</li>
+        <li>Complex real-world patterns</li>
+        <li>Solution → Use MLP (next section)</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Why XOR fails — Visual Proof</h3>
+  <div class="svg-wrap">
+  <svg viewBox="0 0 500 220" width="100%" style="max-width:500px">
+    <!-- AND -->
+    <text x="90" y="20" text-anchor="middle" font-family="IBM Plex Sans" font-size="13" font-weight="700" fill="#3dd68c">AND Gate ✓ (Perceptron works)</text>
+    <rect x="20" y="30" width="140" height="140" rx="8" fill="rgba(61,214,140,0.05)" stroke="rgba(61,214,140,0.2)" stroke-width="1"/>
+    <circle cx="45" cy="155" r="10" fill="rgba(240,101,101,0.3)" stroke="#f06565" stroke-width="2"/>
+    <text x="45" y="159" text-anchor="middle" font-family="IBM Plex Mono" font-size="9" fill="#f06565">0,0</text>
+    <circle cx="145" cy="155" r="10" fill="rgba(240,101,101,0.3)" stroke="#f06565" stroke-width="2"/>
+    <text x="145" y="159" text-anchor="middle" font-family="IBM Plex Mono" font-size="9" fill="#f06565">1,0</text>
+    <circle cx="45" cy="55" r="10" fill="rgba(240,101,101,0.3)" stroke="#f06565" stroke-width="2"/>
+    <text x="45" y="59" text-anchor="middle" font-family="IBM Plex Mono" font-size="9" fill="#f06565">0,1</text>
+    <circle cx="145" cy="55" r="12" fill="rgba(61,214,140,0.3)" stroke="#3dd68c" stroke-width="2.5"/>
+    <text x="145" y="59" text-anchor="middle" font-family="IBM Plex Mono" font-size="9" fill="#3dd68c">1,1</text>
+    <!-- Decision line for AND -->
+    <line x1="70" y1="170" x2="160" y2="30" stroke="#22d3c8" stroke-width="2" stroke-dasharray="5,3"/>
+    <text x="90" y="200" text-anchor="middle" font-family="IBM Plex Sans" font-size="11" fill="#22d3c8">Line separates ✓</text>
+
+    <!-- XOR -->
+    <text x="370" y="20" text-anchor="middle" font-family="IBM Plex Sans" font-size="13" font-weight="700" fill="#f06565">XOR Gate ✗ (Perceptron fails)</text>
+    <rect x="290" y="30" width="160" height="140" rx="8" fill="rgba(240,101,101,0.04)" stroke="rgba(240,101,101,0.2)" stroke-width="1"/>
+    <circle cx="315" cy="155" r="10" fill="rgba(240,101,101,0.3)" stroke="#f06565" stroke-width="2"/>
+    <text x="315" y="159" text-anchor="middle" font-family="IBM Plex Mono" font-size="9" fill="#f06565">0,0</text>
+    <circle cx="430" cy="155" r="12" fill="rgba(61,214,140,0.3)" stroke="#3dd68c" stroke-width="2.5"/>
+    <text x="430" y="159" text-anchor="middle" font-family="IBM Plex Mono" font-size="9" fill="#3dd68c">1,0</text>
+    <circle cx="315" cy="55" r="12" fill="rgba(61,214,140,0.3)" stroke="#3dd68c" stroke-width="2.5"/>
+    <text x="315" y="59" text-anchor="middle" font-family="IBM Plex Mono" font-size="9" fill="#3dd68c">0,1</text>
+    <circle cx="430" cy="55" r="10" fill="rgba(240,101,101,0.3)" stroke="#f06565" stroke-width="2"/>
+    <text x="430" y="59" text-anchor="middle" font-family="IBM Plex Mono" font-size="9" fill="#f06565">1,1</text>
+    <text x="370" y="190" text-anchor="middle" font-family="IBM Plex Sans" font-size="11" fill="#f06565">No single line can separate ✗</text>
+    <text x="370" y="205" text-anchor="middle" font-family="IBM Plex Sans" font-size="10" fill="#6b7289">Need MLP with hidden layer!</text>
+    <!-- Legend -->
+    <circle cx="220" cy="175" r="6" fill="rgba(240,101,101,0.3)" stroke="#f06565" stroke-width="1.5"/>
+    <text x="230" y="179" font-family="IBM Plex Sans" font-size="10" fill="#f06565">= 0 (negative)</text>
+    <circle cx="220" cy="195" r="6" fill="rgba(61,214,140,0.3)" stroke="#3dd68c" stroke-width="1.5"/>
+    <text x="230" y="199" font-family="IBM Plex Sans" font-size="10" fill="#3dd68c">= 1 (positive)</text>
+  </svg>
+  </div>
+</div>
+
+<!-- ══════════════════════════════ SECTION 3 ══════════════════════════════ -->
+<div class="section" id="s3">
+  <div class="section-badge"><div class="num">3</div><span>Multi-Layer</span></div>
+  <h2>Multi-Layer Perceptron (MLP)</h2>
+  <p class="tagline">Stack multiple layers of perceptrons → solve ANY problem. The "deep" in deep learning comes from many hidden layers.</p>
+
+  <h3>Structure of an MLP</h3>
+  <div class="svg-wrap">
+  <svg viewBox="0 0 600 300" width="100%" style="max-width:600px">
+    <!-- Layer labels -->
+    <text x="60" y="22" text-anchor="middle" font-family="IBM Plex Sans" font-size="11" font-weight="700" fill="#5b8df0">INPUT LAYER</text>
+    <text x="220" y="22" text-anchor="middle" font-family="IBM Plex Sans" font-size="11" font-weight="700" fill="#8b6cf7">HIDDEN LAYER 1</text>
+    <text x="370" y="22" text-anchor="middle" font-family="IBM Plex Sans" font-size="11" font-weight="700" fill="#8b6cf7">HIDDEN LAYER 2</text>
+    <text x="530" y="22" text-anchor="middle" font-family="IBM Plex Sans" font-size="11" font-weight="700" fill="#3dd68c">OUTPUT LAYER</text>
+    <!-- Input neurons -->
+    <circle cx="60" cy="80" r="20" fill="rgba(91,141,240,0.2)" stroke="#5b8df0" stroke-width="2"/>
+    <text x="60" y="84" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#7eb0ff">x₁</text>
+    <circle cx="60" cy="150" r="20" fill="rgba(91,141,240,0.2)" stroke="#5b8df0" stroke-width="2"/>
+    <text x="60" y="154" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#7eb0ff">x₂</text>
+    <circle cx="60" cy="220" r="20" fill="rgba(91,141,240,0.2)" stroke="#5b8df0" stroke-width="2"/>
+    <text x="60" y="224" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#7eb0ff">x₃</text>
+    <!-- Hidden layer 1 neurons -->
+    <circle cx="220" cy="70" r="20" fill="rgba(139,108,247,0.2)" stroke="#8b6cf7" stroke-width="2"/>
+    <text x="220" y="74" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#a78bfa">h₁</text>
+    <circle cx="220" cy="140" r="20" fill="rgba(139,108,247,0.2)" stroke="#8b6cf7" stroke-width="2"/>
+    <text x="220" y="144" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#a78bfa">h₂</text>
+    <circle cx="220" cy="210" r="20" fill="rgba(139,108,247,0.2)" stroke="#8b6cf7" stroke-width="2"/>
+    <text x="220" y="214" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#a78bfa">h₃</text>
+    <circle cx="220" cy="270" r="20" fill="rgba(139,108,247,0.2)" stroke="#8b6cf7" stroke-width="2"/>
+    <text x="220" y="274" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#a78bfa">h₄</text>
+    <!-- Hidden layer 2 neurons -->
+    <circle cx="370" cy="100" r="20" fill="rgba(139,108,247,0.2)" stroke="#8b6cf7" stroke-width="2"/>
+    <text x="370" y="104" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#a78bfa">h₅</text>
+    <circle cx="370" cy="170" r="20" fill="rgba(139,108,247,0.2)" stroke="#8b6cf7" stroke-width="2"/>
+    <text x="370" y="174" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#a78bfa">h₆</text>
+    <circle cx="370" cy="240" r="20" fill="rgba(139,108,247,0.2)" stroke="#8b6cf7" stroke-width="2"/>
+    <text x="370" y="244" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#a78bfa">h₇</text>
+    <!-- Output neuron -->
+    <circle cx="530" cy="170" r="24" fill="rgba(61,214,140,0.2)" stroke="#3dd68c" stroke-width="2.5"/>
+    <text x="530" y="167" text-anchor="middle" font-family="IBM Plex Sans" font-size="10" font-weight="700" fill="#3dd68c">OUTPUT</text>
+    <text x="530" y="179" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" fill="#4ade80">ŷ</text>
+    <!-- Connections input→h1 (subset) -->
+    <line x1="80" y1="80" x2="200" y2="70" stroke="rgba(91,141,240,0.3)" stroke-width="1"/>
+    <line x1="80" y1="80" x2="200" y2="140" stroke="rgba(91,141,240,0.3)" stroke-width="1"/>
+    <line x1="80" y1="80" x2="200" y2="210" stroke="rgba(91,141,240,0.3)" stroke-width="1"/>
+    <line x1="80" y1="150" x2="200" y2="70" stroke="rgba(91,141,240,0.3)" stroke-width="1"/>
+    <line x1="80" y1="150" x2="200" y2="140" stroke="rgba(91,141,240,0.3)" stroke-width="1"/>
+    <line x1="80" y1="150" x2="200" y2="210" stroke="rgba(91,141,240,0.3)" stroke-width="1"/>
+    <line x1="80" y1="220" x2="200" y2="140" stroke="rgba(91,141,240,0.3)" stroke-width="1"/>
+    <line x1="80" y1="220" x2="200" y2="210" stroke="rgba(91,141,240,0.3)" stroke-width="1"/>
+    <line x1="80" y1="220" x2="200" y2="270" stroke="rgba(91,141,240,0.3)" stroke-width="1"/>
+    <!-- Connections h1→h2 -->
+    <line x1="240" y1="70" x2="350" y2="100" stroke="rgba(139,108,247,0.3)" stroke-width="1"/>
+    <line x1="240" y1="70" x2="350" y2="170" stroke="rgba(139,108,247,0.3)" stroke-width="1"/>
+    <line x1="240" y1="140" x2="350" y2="100" stroke="rgba(139,108,247,0.3)" stroke-width="1"/>
+    <line x1="240" y1="140" x2="350" y2="170" stroke="rgba(139,108,247,0.3)" stroke-width="1"/>
+    <line x1="240" y1="210" x2="350" y2="170" stroke="rgba(139,108,247,0.3)" stroke-width="1"/>
+    <line x1="240" y1="210" x2="350" y2="240" stroke="rgba(139,108,247,0.3)" stroke-width="1"/>
+    <line x1="240" y1="270" x2="350" y2="240" stroke="rgba(139,108,247,0.3)" stroke-width="1"/>
+    <!-- Connections h2→output -->
+    <line x1="390" y1="100" x2="506" y2="170" stroke="rgba(61,214,140,0.35)" stroke-width="1.2"/>
+    <line x1="390" y1="170" x2="506" y2="170" stroke="rgba(61,214,140,0.35)" stroke-width="1.2"/>
+    <line x1="390" y1="240" x2="506" y2="170" stroke="rgba(61,214,140,0.35)" stroke-width="1.2"/>
+  </svg>
+  </div>
+
+  <h3>Why Hidden Layers are Powerful</h3>
+  <p>Each hidden layer learns increasingly abstract features:</p>
+  <table>
+    <tr><th>Layer</th><th>What it learns (image example)</th><th>What it learns (text example)</th></tr>
+    <tr><td>Layer 1</td><td>Edges and simple textures</td><td>Individual character patterns</td></tr>
+    <tr><td>Layer 2</td><td>Shapes (corners, curves)</td><td>Word-level patterns</td></tr>
+    <tr><td>Layer 3</td><td>Parts (eyes, wheels, legs)</td><td>Phrase-level patterns</td></tr>
+    <tr><td>Layer 4+</td><td>Whole objects (faces, cars)</td><td>Sentence meaning, intent</td></tr>
+  </table>
+
+  <h3>Universal Approximation Theorem</h3>
+  <div class="box purple">
+    <div class="box-label">Theoretical Foundation</div>
+    <p>A feedforward neural network with <strong>at least one hidden layer</strong> and a sufficient number of neurons can approximate <strong>any continuous function</strong> to any desired accuracy. This is why MLPs are called "universal function approximators".</p>
+  </div>
+</div>
+
+<!-- ══════════════════════════════ SECTION 4 ══════════════════════════════ -->
+<div class="section" id="s4">
+  <div class="section-badge"><div class="num">4</div><span>Full ANN</span></div>
+  <h2>Artificial Neural Network (ANN) — Complete Architecture</h2>
+  <p class="tagline">ANN is the umbrella term. Everything from the simple MLP to CNNs and RNNs are types of ANNs.</p>
+
+  <h3>Types of ANN</h3>
+  <div class="g2">
+    <div class="card" style="border-color:rgba(91,141,240,0.3)">
+      <h5 style="color:var(--blue)">Feedforward ANN</h5>
+      <p>Information flows only forward — input → hidden → output. No cycles. The simplest type. MLP is a feedforward ANN. Good for: classification, regression.</p>
+    </div>
+    <div class="card" style="border-color:rgba(34,211,200,0.3)">
+      <h5 style="color:var(--teal)">Recurrent ANN (RNN)</h5>
+      <p>Has feedback loops — output goes back as input. Has "memory" of previous inputs. Good for: text, speech, time series.</p>
+    </div>
+    <div class="card" style="border-color:rgba(245,166,35,0.3)">
+      <h5 style="color:var(--amber)">Convolutional ANN (CNN)</h5>
+      <p>Uses convolution operation. Shared weights. Local connectivity. Hierarchical feature learning. Good for: images, video.</p>
+    </div>
+    <div class="card" style="border-color:rgba(232,121,160,0.3)">
+      <h5 style="color:var(--pink)">Autoencoder</h5>
+      <p>Encoder compresses input → bottleneck → decoder reconstructs. Learns compressed representation. Good for: dimensionality reduction, anomaly detection.</p>
+    </div>
+  </div>
+
+  <h3>Key ANN Terminology You Must Know</h3>
+  <table>
+    <tr><th>Term</th><th>Definition</th><th>Example</th></tr>
+    <tr><td>Epoch</td><td>One complete pass through the entire training dataset</td><td>Training for 100 epochs = dataset seen 100 times</td></tr>
+    <tr><td>Batch Size</td><td>Number of training samples per weight update</td><td>Batch size 32 = update weights after every 32 samples</td></tr>
+    <tr><td>Iteration</td><td>One forward + backward pass on one batch</td><td>1000 samples / batch 32 = 32 iterations per epoch</td></tr>
+    <tr><td>Learning Rate (η)</td><td>How big each step is during gradient descent</td><td>η=0.001 is typical</td></tr>
+    <tr><td>Parameters</td><td>All learnable weights and biases in the network</td><td>ResNet-50 has ~25 million parameters</td></tr>
+    <tr><td>Hyperparameters</td><td>Settings chosen before training (not learned)</td><td>Learning rate, number of layers, batch size</td></tr>
+    <tr><td>Inference</td><td>Using a trained model to make predictions</td><td>Running a deployed model on new data</td></tr>
+  </table>
+</div>
+
+<!-- ══════════════════════════════ SECTION 5 ══════════════════════════════ -->
+<div class="section" id="s5">
+  <div class="section-badge"><div class="num">5</div><span>Computation</span></div>
+  <h2>Forward Pass — How Predictions are Made</h2>
+  <p class="tagline">The forward pass is how a neural network produces an output. It's pure math — matrix multiplications and activation functions.</p>
+
+  <h3>Matrix Form — How it Actually Runs</h3>
+  <p>For each layer, we compute:</p>
+  <div class="formula">Z = W · X + b &nbsp;&nbsp;&nbsp;(linear transformation)</div>
+  <div class="formula">A = f(Z) &nbsp;&nbsp;&nbsp;(apply activation function)</div>
+  <p>Where <strong>W</strong> is the weight matrix, <strong>X</strong> is the input, <strong>b</strong> is bias vector, <strong>f</strong> is the activation function.</p>
+
+  <h3>Concrete Example — 2-Layer Network</h3>
+  <div class="box blue">
+    <div class="box-label">Network: 2 inputs → 3 hidden → 1 output</div>
+    <p><strong>Input:</strong> X = [0.5, 0.8] (2 features)</p>
+    <p><strong>Hidden Layer:</strong> W₁ (3×2 matrix), b₁ (3×1) → Z₁ = W₁·X + b₁ → A₁ = ReLU(Z₁)</p>
+    <p><strong>Output Layer:</strong> W₂ (1×3 matrix), b₂ → Z₂ = W₂·A₁ + b₂ → ŷ = sigmoid(Z₂)</p>
+    <p>The output ŷ is a single number between 0 and 1 → probability of class 1.</p>
+  </div>
+
+  <h3>Computational Graph</h3>
+  <div class="diagram"><span class="dn">Input X</span>
+   ↓
+<span class="dl">[Layer 1: Z₁ = W₁·X + b₁]</span> → <span class="dh">[A₁ = ReLU(Z₁)]</span>
+   ↓
+<span class="dl">[Layer 2: Z₂ = W₂·A₁ + b₂]</span> → <span class="dh">[A₂ = ReLU(Z₂)]</span>
+   ↓
+<span class="dl">[Output: Z₃ = W₃·A₂ + b₃]</span> → <span class="dh">[ŷ = sigmoid(Z₃)]</span>
+   ↓
+<span class="dn">Prediction ŷ</span>
+   ↓
+<span class="da">Compare with true label y</span>
+   ↓
+<span class="dl">[Loss L = -y·log(ŷ) - (1-y)·log(1-ŷ)]</span></div>
+</div>
+
+<!-- ══════════════════════════════ SECTION 6 ══════════════════════════════ -->
+<div class="section" id="s6">
+  <div class="section-badge"><div class="num">6</div><span>Learning</span></div>
+  <h2>Backpropagation — How Neural Networks Learn</h2>
+  <p class="tagline">Backpropagation is the algorithm that makes neural networks learn. It uses calculus (chain rule) to figure out which weights caused the error and how to fix them.</p>
+
+  <h3>The Big Picture — 4 Steps</h3>
+  <ol class="steps">
+    <li><strong>Forward Pass:</strong> Feed input data through the network → get prediction ŷ</li>
+    <li><strong>Compute Loss:</strong> Measure how wrong the prediction is: L = Loss(y, ŷ)</li>
+    <li><strong>Backward Pass:</strong> Use Chain Rule to compute ∂L/∂w for every weight — how much each weight contributed to the error</li>
+    <li><strong>Update Weights:</strong> Adjust every weight in the direction that reduces loss: w = w − η × ∂L/∂w</li>
+  </ol>
+
+  <h3>Chain Rule — The Mathematical Heart</h3>
+  <p>The chain rule from calculus lets us compute how a change in any weight affects the final loss, even through many layers:</p>
+  <div class="formula">∂L/∂w₁ = (∂L/∂ŷ) × (∂ŷ/∂z₂) × (∂z₂/∂a₁) × (∂a₁/∂z₁) × (∂z₁/∂w₁)</div>
+  <p>Each term is a local gradient. We multiply them together to get the gradient for any weight, no matter how deep it is in the network.</p>
+
+  <h3>Weight Update — Gradient Descent</h3>
+  <div class="formula">w := w − η × ∂L/∂w</div>
+  <p><strong>Intuition:</strong> If ∂L/∂w is positive → loss increases as w increases → decrease w. If negative → loss decreases as w increases → increase w. The gradient always points uphill; we subtract to go downhill toward minimum loss.</p>
+
+  <div class="box amber">
+    <div class="box-label">Vanishing Gradient Warning</div>
+    <p>With sigmoid/tanh activations, gradients get multiplied by values close to 0 at each layer during backprop. After 10+ layers, the gradient for early layers becomes essentially 0 → weights stop learning. This is the vanishing gradient problem. <strong>Solution: Use ReLU activation.</strong></p>
+  </div>
+</div>
+
+<!-- ══════════════════════════════ SECTION 7 ══════════════════════════════ -->
+<div class="section" id="s7">
+  <div class="section-badge"><div class="num">7</div><span>Non-Linearity</span></div>
+  <h2>Activation Functions — Complete Guide</h2>
+  <p class="tagline">Without activation functions, a 100-layer network collapses to just a linear transformation. Activation functions give networks the power to learn ANY function.</p>
+
+  <h3>Why Activation Functions are Essential</h3>
+  <div class="box red">
+    <div class="box-label">Without Activation (Linear Only)</div>
+    <p>W₃(W₂(W₁·x)) = (W₃W₂W₁)·x = W·x — Still just linear! No matter how many layers you stack, it's equivalent to one linear layer. Useless for complex problems.</p>
+  </div>
+  <div class="box green">
+    <div class="box-label">With Activation (Non-Linear)</div>
+    <p>f(W₂·f(W₁·x)) ≠ any linear transformation. Each layer creates a new non-linear transformation. Stacking many = can approximate any function.</p>
+  </div>
+
+  <h3>All Major Activation Functions</h3>
+  <table>
+    <tr><th>Function</th><th>Formula</th><th>Output Range</th><th>Pros</th><th>Cons</th><th>Use Where</th></tr>
+    <tr><td><strong>Step</strong></td><td>1 if z≥0, 0 if z&lt;0</td><td>{0, 1}</td><td>Simple binary</td><td>Not differentiable → no backprop</td><td>Original perceptron only</td></tr>
+    <tr><td><strong>Sigmoid</strong></td><td>1/(1+e⁻ᶻ)</td><td>(0, 1)</td><td>Smooth, probabilistic output</td><td>Vanishing gradient, slow</td><td>Binary classification output</td></tr>
+    <tr><td><strong>Tanh</strong></td><td>(eᶻ−e⁻ᶻ)/(eᶻ+e⁻ᶻ)</td><td>(−1, 1)</td><td>Zero-centered (better than sigmoid)</td><td>Still has vanishing gradient</td><td>Hidden layers (when centered needed)</td></tr>
+    <tr><td><strong>ReLU</strong></td><td>max(0, z)</td><td>[0, ∞)</td><td>No vanishing gradient (positive), very fast</td><td>Dying ReLU (z≤0 → gradient=0 forever)</td><td>Hidden layers (default choice)</td></tr>
+    <tr><td><strong>Leaky ReLU</strong></td><td>z if z>0, else 0.01z</td><td>(−∞, ∞)</td><td>Fixes dying ReLU</td><td>Extra hyperparameter α</td><td>Hidden layers when ReLU dies</td></tr>
+    <tr><td><strong>ELU</strong></td><td>z if z>0, else α(eᶻ−1)</td><td>(−α, ∞)</td><td>Smooth, negative values push mean toward 0</td><td>Computationally expensive</td><td>Deep networks, better than ReLU</td></tr>
+    <tr><td><strong>Softmax</strong></td><td>eᶻⁱ / Σeᶻʲ</td><td>(0, 1), sum=1</td><td>Probability distribution over classes</td><td>Only for output layer</td><td>Multi-class classification output</td></tr>
+    <tr><td><strong>GELU</strong></td><td>z·Φ(z)</td><td>(−∞, ∞)</td><td>Smooth, stochastic, state-of-the-art</td><td>Complex to compute</td><td>Transformers (BERT, GPT)</td></tr>
+  </table>
+
+  <h3>Dying ReLU — Explained with Example</h3>
+  <div class="box red">
+    <div class="box-label">The Dying ReLU Problem</div>
+    <p>ReLU outputs 0 for any z ≤ 0. When z is negative: gradient = 0 → weight update = 0 → weight never changes again. The neuron is "dead" — permanently outputs 0 regardless of input.</p>
+    <p><strong>Cause:</strong> Large negative bias or very high learning rate.</p>
+    <p><strong>Fix 1:</strong> Leaky ReLU — f(z) = 0.01z for z≤0 (small non-zero gradient keeps neuron alive)</p>
+    <p><strong>Fix 2:</strong> Careful weight initialization (He initialization)</p>
+    <p><strong>Fix 3:</strong> Lower learning rate + batch normalization</p>
+  </div>
+
+  <h3>Sigmoid vs ReLU — Training Speed</h3>
+  <div class="cmp-bar"><div class="cmp-label">Sigmoid Training</div><div class="cmp-track"><div class="cmp-fill" style="width:25%;background:var(--red)"></div></div><span style="font-size:12px;color:var(--text3)">Slow (saturates)</span></div>
+  <div class="cmp-bar"><div class="cmp-label">Tanh Training</div><div class="cmp-track"><div class="cmp-fill" style="width:40%;background:var(--amber)"></div></div><span style="font-size:12px;color:var(--text3)">Medium</span></div>
+  <div class="cmp-bar"><div class="cmp-label">ReLU Training</div><div class="cmp-track"><div class="cmp-fill" style="width:90%;background:var(--green)"></div></div><span style="font-size:12px;color:var(--text3)">Very fast ✓</span></div>
+  <div class="cmp-bar"><div class="cmp-label">Leaky ReLU</div><div class="cmp-track"><div class="cmp-fill" style="width:88%;background:var(--teal)"></div></div><span style="font-size:12px;color:var(--text3)">Fast + stable ✓</span></div>
+</div>
+
+<!-- ══════════════════════════════ SECTION 8 ══════════════════════════════ -->
+<div class="section" id="s8">
+  <div class="section-badge"><div class="num">8</div><span>Measurement</span></div>
+  <h2>Loss Functions — Measuring Errors</h2>
+  <p class="tagline">Loss functions measure how wrong the network's predictions are. The network's job is to minimize this number.</p>
+
+  <h3>For Regression (predicting numbers)</h3>
+  <div class="g2">
+    <div class="box teal">
+      <div class="box-label">Mean Squared Error (MSE)</div>
+      <p style="font-family:'IBM Plex Mono',monospace;color:var(--amber);margin-bottom:8px">MSE = (1/n) Σ(yᵢ − ŷᵢ)²</p>
+      <p>Squares errors so large errors are penalized heavily. Differentiable everywhere. Most common for regression.</p>
+    </div>
+    <div class="box blue">
+      <div class="box-label">Mean Absolute Error (MAE)</div>
+      <p style="font-family:'IBM Plex Mono',monospace;color:var(--amber);margin-bottom:8px">MAE = (1/n) Σ|yᵢ − ŷᵢ|</p>
+      <p>Treats all errors equally. More robust to outliers than MSE. Not differentiable at 0.</p>
+    </div>
+  </div>
+
+  <h3>For Classification (predicting categories)</h3>
+  <div class="g2">
+    <div class="box green">
+      <div class="box-label">Binary Cross-Entropy</div>
+      <p style="font-family:'IBM Plex Mono',monospace;color:var(--amber);margin-bottom:8px;font-size:12px">L = −[y·log(ŷ) + (1−y)·log(1−ŷ)]</p>
+      <p>For 2 classes. y ∈ {0,1}. Penalizes confident wrong predictions much more than uncertain ones.</p>
+      <p><strong>Example:</strong> True y=1, predicted ŷ=0.9 → loss=0.10 (good). ŷ=0.1 → loss=2.30 (very bad!)</p>
+    </div>
+    <div class="box purple">
+      <div class="box-label">Categorical Cross-Entropy</div>
+      <p style="font-family:'IBM Plex Mono',monospace;color:var(--amber);margin-bottom:8px;font-size:12px">L = −Σ yᵢ·log(ŷᵢ)</p>
+      <p>For multiple classes. Used with Softmax output. Only the true class's probability contributes to loss (other terms are 0).</p>
+      <p><strong>Example:</strong> 3 classes [dog,cat,bird]. True=[1,0,0], Predicted=[0.7,0.2,0.1] → L=−log(0.7)=0.36</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════ SECTION 9 ══════════════════════════════ -->
+<div class="section" id="s9">
+  <div class="section-badge"><div class="num">9</div><span>Optimization</span></div>
+  <h2>Optimizers — How Weights are Updated</h2>
+  <p class="tagline">The optimizer defines the strategy for updating weights to minimize the loss. Choosing the right optimizer dramatically affects training speed and final accuracy.</p>
+
+  <h3>Gradient Descent Variants</h3>
+  <table>
+    <tr><th>Optimizer</th><th>Uses</th><th>Update Frequency</th><th>Pros</th><th>Cons</th></tr>
+    <tr><td>Batch GD</td><td>Full dataset</td><td>Once per epoch</td><td>Stable, converges smoothly</td><td>Very slow for large datasets, needs all data in memory</td></tr>
+    <tr><td>Stochastic GD (SGD)</td><td>1 sample</td><td>Every sample</td><td>Fast updates, can escape local minima</td><td>Noisy, may not converge stably</td></tr>
+    <tr><td>Mini-Batch GD</td><td>k samples (e.g. 32)</td><td>Every k samples</td><td>Best of both worlds, GPU-friendly</td><td>One more hyperparameter (batch size)</td></tr>
+    <tr><td>Momentum SGD</td><td>Mini-batch + momentum</td><td>Every batch</td><td>Faster convergence, smooths oscillations</td><td>Extra hyperparameter β</td></tr>
+    <tr><td>RMSprop</td><td>Adaptive per-param lr</td><td>Every batch</td><td>Good for RNNs, adapts to gradient magnitude</td><td>Less principled than Adam</td></tr>
+    <tr><td><strong>Adam</strong></td><td>Adaptive + momentum</td><td>Every batch</td><td>Fast, adaptive, works well everywhere (default choice)</td><td>May not generalize as well as SGD in some cases</td></tr>
+  </table>
+
+  <h3>Adam — The Default Choice Explained</h3>
+  <p>Adam (Adaptive Moment Estimation) combines two ideas:</p>
+  <div class="g2">
+    <div class="box blue">
+      <div class="box-label">Momentum (1st moment)</div>
+      <p>Keeps a running average of gradients. Like a ball rolling down a hill — it builds up speed in consistent directions. Helps escape flat regions and saddle points.</p>
+    </div>
+    <div class="box teal">
+      <div class="box-label">Adaptive Learning Rate (2nd moment)</div>
+      <p>Divides learning rate by √(running average of squared gradients). Parameters with large gradients → smaller steps. Parameters with small gradients → larger steps.</p>
+    </div>
+  </div>
+  <div class="formula">m = β₁·m + (1−β₁)·g &nbsp;&nbsp;&nbsp; v = β₂·v + (1−β₂)·g² &nbsp;&nbsp;&nbsp; w = w − η·m̂/√(v̂+ε)</div>
+  <p>Default values: β₁=0.9, β₂=0.999, η=0.001, ε=1e-8</p>
+
+  <h3>Learning Rate — The Most Important Hyperparameter</h3>
+  <div class="g3">
+    <div class="box red"><div class="box-label">Too High (e.g. 1.0)</div><p>Overshoots minimum. Loss oscillates wildly or explodes. Network diverges.</p></div>
+    <div class="box green"><div class="box-label">Just Right (e.g. 0.001)</div><p>Smooth convergence. Loss decreases steadily. Reaches good minimum.</p></div>
+    <div class="box amber"><div class="box-label">Too Low (e.g. 1e-7)</div><p>Training is extremely slow. May get stuck in bad local minimum. Wastes compute.</p></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════ SECTION 10 ══════════════════════════════ -->
+<div class="section" id="s10">
+  <div class="section-badge"><div class="num">10</div><span>Generalization</span></div>
+  <h2>Overfitting, Underfitting & Regularization</h2>
+  <p class="tagline">The most important practical challenge: making your model work on new unseen data, not just memorize training data.</p>
+
+  <h3>The Bias-Variance Tradeoff</h3>
+  <div class="g3">
+    <div class="box red"><div class="box-label">Underfitting (High Bias)</div><p>Model too simple. Doesn't even learn training data well. Train error HIGH. Val error HIGH. Add more layers, neurons, train longer.</p></div>
+    <div class="box green"><div class="box-label">Good Fit</div><p>Model generalizes. Train error LOW. Val error ≈ Train error (small gap). This is the goal.</p></div>
+    <div class="box amber"><div class="box-label">Overfitting (High Variance)</div><p>Model memorizes training data including noise. Train error very LOW. Val error HIGH. Big gap between them.</p></div>
+  </div>
+
+  <h3>Regularization Techniques — Preventing Overfitting</h3>
+  <table>
+    <tr><th>Technique</th><th>How It Works</th><th>Effect</th><th>Formula</th></tr>
+    <tr><td><strong>L2 Regularization (Ridge/Weight Decay)</strong></td><td>Adds λΣw² to loss function</td><td>Pushes all weights toward (but not exactly) zero. Spreads weight evenly.</td><td>L_total = L + λΣwᵢ²</td></tr>
+    <tr><td><strong>L1 Regularization (Lasso)</strong></td><td>Adds λΣ|w| to loss function</td><td>Pushes many weights to exactly zero → sparse network → feature selection</td><td>L_total = L + λΣ|wᵢ|</td></tr>
+    <tr><td><strong>Dropout</strong></td><td>Randomly sets p% of neurons to 0 during each training step</td><td>Forces redundant representations. Acts like ensemble of many smaller networks.</td><td>Keep prob=1−p (e.g. p=0.5)</td></tr>
+    <tr><td><strong>Batch Normalization</strong></td><td>Normalizes layer inputs: x̂ = (x−μ)/σ, then y = γx̂+β</td><td>Stabilizes training, allows higher learning rates, mild regularization effect</td><td>BN(x) = γ·(x−μ)/σ + β</td></tr>
+    <tr><td><strong>Early Stopping</strong></td><td>Monitor validation loss; stop when it starts increasing</td><td>Prevents training too long which causes overfitting</td><td>Stop at epoch with min val_loss</td></tr>
+    <tr><td><strong>Data Augmentation</strong></td><td>Create more training data by transforming existing (flip, rotate, crop)</td><td>More diverse data → model can't memorize, must generalize</td><td>Applies to input pipeline</td></tr>
+  </table>
+
+  <div class="box blue">
+    <div class="box-label">Dropout — How It Works Exactly</div>
+    <ul>
+      <li><strong>Training:</strong> Each neuron independently zeroed with probability p (e.g. 0.5). Scale remaining by 1/(1−p) to maintain expected values.</li>
+      <li><strong>Testing/Inference:</strong> Dropout is DISABLED. All neurons active. No scaling needed (already handled during training).</li>
+      <li><strong>Effect:</strong> It's like training 2^n different network architectures simultaneously and averaging them.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ══════════════════════════════ SECTION 11 ══════════════════════════════ -->
+<div class="section" id="s11">
+  <div class="section-badge"><div class="num">11</div><span>Dimensionality</span></div>
+  <h2>Curse of Dimensionality</h2>
+  <p class="tagline">As the number of features (dimensions) grows, data becomes exponentially sparse and machine learning becomes exponentially harder.</p>
+
+  <h3>The Core Intuition</h3>
+  <p>Imagine you have 100 training samples. How well do they "fill" the feature space?</p>
+
+  <div class="svg-wrap">
+  <svg viewBox="0 0 600 160" width="100%" style="max-width:600px">
+    <!-- 1D -->
+    <text x="80" y="20" text-anchor="middle" font-family="IBM Plex Sans" font-size="11" font-weight="700" fill="#5b8df0">1D (10 features)</text>
+    <rect x="10" y="30" width="140" height="20" rx="4" fill="rgba(91,141,240,0.1)" stroke="rgba(91,141,240,0.3)" stroke-width="1"/>
+    <circle cx="20" cy="40" r="5" fill="#5b8df0"/><circle cx="38" cy="40" r="5" fill="#5b8df0"/><circle cx="56" cy="40" r="5" fill="#5b8df0"/><circle cx="74" cy="40" r="5" fill="#5b8df0"/><circle cx="92" cy="40" r="5" fill="#5b8df0"/><circle cx="110" cy="40" r="5" fill="#5b8df0"/><circle cx="128" cy="40" r="5" fill="#5b8df0"/>
+    <text x="80" y="70" text-anchor="middle" font-family="IBM Plex Sans" font-size="11" fill="#3dd68c">Densely covered ✓</text>
+    <text x="80" y="84" text-anchor="middle" font-family="IBM Plex Sans" font-size="10" fill="#6b7289">10 points fill a line</text>
+
+    <!-- 2D -->
+    <text x="305" y="20" text-anchor="middle" font-family="IBM Plex Sans" font-size="11" font-weight="700" fill="#8b6cf7">2D (needs 100 points)</text>
+    <rect x="220" y="28" width="120" height="100" rx="4" fill="rgba(139,108,247,0.07)" stroke="rgba(139,108,247,0.3)" stroke-width="1"/>
+    <circle cx="235" cy="42" r="4" fill="#8b6cf7"/><circle cx="265" cy="42" r="4" fill="#8b6cf7"/><circle cx="295" cy="42" r="4" fill="#8b6cf7"/>
+    <circle cx="235" cy="72" r="4" fill="#8b6cf7"/><circle cx="265" cy="72" r="4" fill="#8b6cf7"/><circle cx="295" cy="72" r="4" fill="#8b6cf7"/>
+    <circle cx="235" cy="102" r="4" fill="#8b6cf7"/><circle cx="265" cy="102" r="4" fill="#8b6cf7"/><circle cx="295" cy="102" r="4" fill="#8b6cf7"/>
+    <circle cx="320" cy="60" r="3" fill="rgba(139,108,247,0.4)"/><circle cx="320" cy="90" r="3" fill="rgba(139,108,247,0.4)"/>
+    <text x="305" y="148" text-anchor="middle" font-family="IBM Plex Sans" font-size="11" fill="#f5a623">Sparser ≈</text>
+    <text x="305" y="160" text-anchor="middle" font-family="IBM Plex Sans" font-size="10" fill="#6b7289">Need 10²=100 points</text>
+
+    <!-- 3D arrow -->
+    <text x="450" y="20" text-anchor="middle" font-family="IBM Plex Sans" font-size="11" font-weight="700" fill="#f06565">3D (needs 1000 pts)</text>
+    <rect x="385" y="30" width="130" height="100" rx="4" fill="rgba(240,101,101,0.05)" stroke="rgba(240,101,101,0.25)" stroke-width="1"/>
+    <circle cx="400" cy="50" r="3.5" fill="#f06565" opacity="0.8"/><circle cx="430" cy="60" r="3.5" fill="#f06565" opacity="0.8"/><circle cx="460" cy="45" r="3.5" fill="#f06565" opacity="0.5"/>
+    <circle cx="405" cy="95" r="3.5" fill="#f06565" opacity="0.6"/><circle cx="500" cy="85" r="3.5" fill="#f06565" opacity="0.4"/>
+    <text x="450" y="148" text-anchor="middle" font-family="IBM Plex Sans" font-size="11" fill="#f06565">Very sparse ✗</text>
+    <text x="450" y="160" text-anchor="middle" font-family="IBM Plex Sans" font-size="10" fill="#6b7289">Need 10³=1000 points</text>
+  </svg>
+  </div>
+
+  <h3>Consequences in Practice</h3>
+  <ol class="steps">
+    <li><strong>Data sparsity:</strong> With 100 features, 1000 training samples are microscopic relative to the possible input space. Every new test sample is far from any training sample.</li>
+    <li><strong>Distance metrics break down:</strong> In high dimensions, all points become approximately the same distance from each other. K-NN, SVM, and other distance-based methods fail.</li>
+    <li><strong>Exponentially more data needed:</strong> To maintain data density in d dimensions, you need N^d samples. 10 samples for 1D → 10^100 for 100D.</li>
+    <li><strong>Overfitting becomes trivial:</strong> With more features than samples, a model can perfectly memorize training data by using spurious feature combinations.</li>
+    <li><strong>Computational explosion:</strong> Training time grows polynomially or exponentially with dimensions.</li>
+  </ol>
+
+  <h3>Solutions</h3>
+  <table>
+    <tr><th>Solution</th><th>Technique</th><th>How It Helps</th></tr>
+    <tr><td>Linear Dim. Reduction</td><td>PCA (Principal Component Analysis)</td><td>Projects to k dimensions keeping maximum variance. 1000D → 50D while keeping 95% of information.</td></tr>
+    <tr><td>Non-linear Dim. Reduction</td><td>t-SNE, UMAP</td><td>Maps high-dim data to 2D/3D preserving local structure. Used for visualization.</td></tr>
+    <tr><td>Feature Selection</td><td>Lasso (L1), RFE, information gain</td><td>Removes irrelevant features before training. Direct reduction of dimensions.</td></tr>
+    <tr><td>Deep Learning Embeddings</td><td>Autoencoders, Word2Vec</td><td>Neural network learns compact low-dimensional representation. 50,000-word vocab → 300-dim vector.</td></tr>
+    <tr><td>Regularization</td><td>L1, L2, Dropout</td><td>Prevents model from exploiting spurious high-dimensional correlations.</td></tr>
+  </table>
+</div>
+
+<!-- ══════════════════════════════ SECTION 12 ══════════════════════════════ -->
+<div class="section" id="s12">
+  <div class="section-badge"><div class="num">12</div><span>Vision</span></div>
+  <h2>Convolutional Neural Networks (CNN) — Deep Dive</h2>
+  <p class="tagline">CNNs are specialized for grid-like data (images, video). They learn to detect features using shared filters — the key to efficient vision systems.</p>
+
+  <h3>Why Not Regular ANN for Images?</h3>
+  <div class="box red">
+    <div class="box-label">The Problem</div>
+    <p>A 224×224 color image has <strong>150,528 pixels</strong> (inputs). A fully connected layer with 1000 neurons would require 150,528 × 1,000 = <strong>150 million parameters in just one layer!</strong></p>
+    <p>AlexNet would need billions of parameters. VGGNet would need trillions. Also, FC layers have no sense of spatial structure — nearby pixels have no special relationship.</p>
+  </div>
+
+  <h3>CNN's Three Key Ideas</h3>
+  <div class="g3">
+    <div class="box blue"><div class="box-label">Local Connectivity</div><p>Each neuron only connects to a small local region of the input (receptive field), not all pixels. Captures local patterns like edges.</p></div>
+    <div class="box teal"><div class="box-label">Weight Sharing</div><p>The same filter (set of weights) is applied at every position in the image. An edge detector works the same whether the edge is top-left or bottom-right.</p></div>
+    <div class="box purple"><div class="box-label">Hierarchical Features</div><p>Early layers detect simple features (edges, colors). Deeper layers detect complex features (shapes, parts, objects). Automatically learned!</p></div>
+  </div>
+
+  <h3>Convolution Operation — Step by Step</h3>
+  <p>A <strong>filter</strong> (kernel) of size k×k slides across the input image. At each position, it computes a dot product (element-wise multiply then sum) producing one value in the <strong>feature map</strong>.</p>
+
+  <div class="svg-wrap">
+  <svg viewBox="0 0 580 200" width="100%" style="max-width:580px">
+    <!-- Input 5x5 -->
+    <text x="60" y="18" text-anchor="middle" font-family="IBM Plex Sans" font-size="11" font-weight="700" fill="#5b8df0">Input (5×5)</text>
+    <g id="input">
+      <rect x="10" y="25" width="30" height="30" fill="rgba(91,141,240,0.2)" stroke="rgba(91,141,240,0.4)" stroke-width="1"/><text x="25" y="45" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#9ab8f5">1</text>
+      <rect x="40" y="25" width="30" height="30" fill="rgba(91,141,240,0.2)" stroke="rgba(91,141,240,0.4)" stroke-width="1"/><text x="55" y="45" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#9ab8f5">2</text>
+      <rect x="70" y="25" width="30" height="30" fill="rgba(91,141,240,0.2)" stroke="rgba(91,141,240,0.4)" stroke-width="1"/><text x="85" y="45" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#9ab8f5">0</text>
+      <rect x="100" y="25" width="30" height="30" fill="rgba(91,141,240,0.2)" stroke="rgba(91,141,240,0.4)" stroke-width="1"/><text x="115" y="45" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#9ab8f5">1</text>
+      <rect x="130" y="25" width="30" height="30" fill="rgba(91,141,240,0.2)" stroke="rgba(91,141,240,0.4)" stroke-width="1"/><text x="145" y="45" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#9ab8f5">0</text>
+
+      <!-- highlighted 3x3 region -->
+      <rect x="10" y="55" width="30" height="30" fill="rgba(245,166,35,0.25)" stroke="#f5a623" stroke-width="2"/><text x="25" y="75" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#f5a623">1</text>
+      <rect x="40" y="55" width="30" height="30" fill="rgba(245,166,35,0.25)" stroke="#f5a623" stroke-width="2"/><text x="55" y="75" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#f5a623">0</text>
+      <rect x="70" y="55" width="30" height="30" fill="rgba(245,166,35,0.25)" stroke="#f5a623" stroke-width="2"/><text x="85" y="75" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#f5a623">2</text>
+      <rect x="100" y="55" width="30" height="30" fill="rgba(91,141,240,0.2)" stroke="rgba(91,141,240,0.4)" stroke-width="1"/><text x="115" y="75" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#9ab8f5">1</text>
+      <rect x="130" y="55" width="30" height="30" fill="rgba(91,141,240,0.2)" stroke="rgba(91,141,240,0.4)" stroke-width="1"/><text x="145" y="75" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#9ab8f5">0</text>
+
+      <rect x="10" y="85" width="30" height="30" fill="rgba(245,166,35,0.25)" stroke="#f5a623" stroke-width="2"/><text x="25" y="105" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#f5a623">2</text>
+      <rect x="40" y="85" width="30" height="30" fill="rgba(245,166,35,0.25)" stroke="#f5a623" stroke-width="2"/><text x="55" y="105" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#f5a623">1</text>
+      <rect x="70" y="85" width="30" height="30" fill="rgba(245,166,35,0.25)" stroke="#f5a623" stroke-width="2"/><text x="85" y="105" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#f5a623">0</text>
+      <rect x="100" y="85" width="30" height="30" fill="rgba(91,141,240,0.2)" stroke="rgba(91,141,240,0.4)" stroke-width="1"/><text x="115" y="105" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#9ab8f5">2</text>
+      <rect x="130" y="85" width="30" height="30" fill="rgba(91,141,240,0.2)" stroke="rgba(91,141,240,0.4)" stroke-width="1"/><text x="145" y="105" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#9ab8f5">1</text>
+
+      <rect x="10" y="115" width="30" height="30" fill="rgba(91,141,240,0.2)" stroke="rgba(91,141,240,0.4)" stroke-width="1"/><text x="25" y="135" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#9ab8f5">0</text>
+      <rect x="40" y="115" width="30" height="30" fill="rgba(91,141,240,0.2)" stroke="rgba(91,141,240,0.4)" stroke-width="1"/><text x="55" y="135" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#9ab8f5">1</text>
+      <rect x="70" y="115" width="30" height="30" fill="rgba(91,141,240,0.2)" stroke="rgba(91,141,240,0.4)" stroke-width="1"/><text x="85" y="135" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#9ab8f5">1</text>
+      <rect x="100" y="115" width="30" height="30" fill="rgba(91,141,240,0.2)" stroke="rgba(91,141,240,0.4)" stroke-width="1"/><text x="115" y="135" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#9ab8f5">0</text>
+      <rect x="130" y="115" width="30" height="30" fill="rgba(91,141,240,0.2)" stroke="rgba(91,141,240,0.4)" stroke-width="1"/><text x="145" y="135" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#9ab8f5">1</text>
+      <rect x="10" y="145" width="30" height="30" fill="rgba(91,141,240,0.2)" stroke="rgba(91,141,240,0.4)" stroke-width="1"/>
+      <rect x="40" y="145" width="30" height="30" fill="rgba(91,141,240,0.2)" stroke="rgba(91,141,240,0.4)" stroke-width="1"/>
+      <rect x="70" y="145" width="30" height="30" fill="rgba(91,141,240,0.2)" stroke="rgba(91,141,240,0.4)" stroke-width="1"/>
+      <rect x="100" y="145" width="30" height="30" fill="rgba(91,141,240,0.2)" stroke="rgba(91,141,240,0.4)" stroke-width="1"/>
+      <rect x="130" y="145" width="30" height="30" fill="rgba(91,141,240,0.2)" stroke="rgba(91,141,240,0.4)" stroke-width="1"/>
+    </g>
+    <!-- Multiplication symbol -->
+    <text x="195" y="95" font-family="IBM Plex Sans" font-size="24" fill="#6b7289">×</text>
+
+    <!-- Filter 3x3 -->
+    <text x="255" y="18" text-anchor="middle" font-family="IBM Plex Sans" font-size="11" font-weight="700" fill="#8b6cf7">Filter (3×3)</text>
+    <rect x="215" y="55" width="30" height="30" fill="rgba(139,108,247,0.25)" stroke="#8b6cf7" stroke-width="1.5"/>
+    <text x="230" y="75" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#c4b5fd">1</text>
+    <rect x="245" y="55" width="30" height="30" fill="rgba(139,108,247,0.25)" stroke="#8b6cf7" stroke-width="1.5"/>
+    <text x="260" y="75" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#c4b5fd">0</text>
+    <rect x="275" y="55" width="30" height="30" fill="rgba(139,108,247,0.25)" stroke="#8b6cf7" stroke-width="1.5"/>
+    <text x="290" y="75" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#c4b5fd">1</text>
+    <rect x="215" y="85" width="30" height="30" fill="rgba(139,108,247,0.25)" stroke="#8b6cf7" stroke-width="1.5"/>
+    <text x="230" y="105" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#c4b5fd">0</text>
+    <rect x="245" y="85" width="30" height="30" fill="rgba(139,108,247,0.25)" stroke="#8b6cf7" stroke-width="1.5"/>
+    <text x="260" y="105" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#c4b5fd">1</text>
+    <rect x="275" y="85" width="30" height="30" fill="rgba(139,108,247,0.25)" stroke="#8b6cf7" stroke-width="1.5"/>
+    <text x="290" y="105" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#c4b5fd">0</text>
+    <rect x="215" y="115" width="30" height="30" fill="rgba(139,108,247,0.25)" stroke="#8b6cf7" stroke-width="1.5"/>
+    <text x="230" y="135" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#c4b5fd">1</text>
+    <rect x="245" y="115" width="30" height="30" fill="rgba(139,108,247,0.25)" stroke="#8b6cf7" stroke-width="1.5"/>
+    <text x="260" y="135" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#c4b5fd">0</text>
+    <rect x="275" y="115" width="30" height="30" fill="rgba(139,108,247,0.25)" stroke="#8b6cf7" stroke-width="1.5"/>
+    <text x="290" y="135" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#c4b5fd">1</text>
+
+    <!-- Equals -->
+    <text x="340" y="95" font-family="IBM Plex Sans" font-size="24" fill="#6b7289">=</text>
+
+    <!-- Calculation -->
+    <text x="395" y="18" text-anchor="middle" font-family="IBM Plex Sans" font-size="11" font-weight="700" fill="#3dd68c">One Output Value</text>
+    <text x="365" y="55" font-family="IBM Plex Mono" font-size="11" fill="#6b7289">1×1 + 0×0 + 2×1 +</text>
+    <text x="365" y="72" font-family="IBM Plex Mono" font-size="11" fill="#6b7289">1×0 + 0×1 + 2×0 +</text>
+    <text x="365" y="89" font-family="IBM Plex Mono" font-size="11" fill="#6b7289">2×1 + 1×0 + 0×1 =</text>
+    <rect x="375" y="100" width="80" height="40" rx="10" fill="rgba(61,214,140,0.15)" stroke="#3dd68c" stroke-width="2"/>
+    <text x="415" y="126" text-anchor="middle" font-family="IBM Plex Mono" font-size="18" font-weight="700" fill="#3dd68c">5</text>
+    <text x="395" y="158" text-anchor="middle" font-family="IBM Plex Sans" font-size="10" fill="#6b7289">This one value goes into</text>
+    <text x="395" y="170" text-anchor="middle" font-family="IBM Plex Sans" font-size="10" fill="#6b7289">the output feature map</text>
+  </svg>
+  </div>
+
+  <h3>Key CNN Formulas</h3>
+  <div class="formula">Output Size = ⌊(Input − Filter + 2×Padding) / Stride⌋ + 1</div>
+  <div class="formula">Parameters in Conv Layer = (F × F × C_in + 1) × C_out</div>
+  <p><strong>Example:</strong> Conv layer, input 32×32×3, filter 5×5, 64 filters, no padding, stride 1</p>
+  <p>Output = (32−5+0)/1 + 1 = 28 → Output shape: <strong>28×28×64</strong></p>
+  <p>Parameters = (5×5×3 + 1) × 64 = 76 × 64 = <strong>4,864 parameters</strong></p>
+
+  <h3>Pooling — Spatial Dimension Reduction</h3>
+  <div class="g2">
+    <div class="box teal">
+      <div class="box-label">Max Pooling (most common)</div>
+      <p>Takes the maximum value in each pooling window. Preserves the strongest feature activation. Most invariant to small shifts.</p>
+      <p>2×2 Max Pool, stride 2: input 28×28 → output 14×14 (halves each dimension)</p>
+    </div>
+    <div class="box blue">
+      <div class="box-label">Average Pooling</div>
+      <p>Takes average of all values in the window. Smoother downsampling. Used in GoogLeNet, some modern architectures. Global Average Pooling = average over entire feature map.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════ SECTION 13 ══════════════════════════════ -->
+<div class="section" id="s13">
+  <div class="section-badge"><div class="num">13</div><span>Famous CNNs</span></div>
+  <h2>LeNet, AlexNet, VGGNet, ResNet — Full Details</h2>
+  <p class="tagline">These four architectures represent milestones in deep learning history. Each solved a critical problem of its time.</p>
+
+  <h3>LeNet-5 (1998) — Yann LeCun</h3>
+  <div class="box blue">
+    <div class="box-label">The Pioneer — First Practical CNN</div>
+    <p><strong>Purpose:</strong> Handwritten digit recognition (MNIST, ZIP codes) for US Postal Service</p>
+    <p><strong>Input:</strong> 32×32 grayscale image | <strong>Parameters:</strong> ~60,000 | <strong>Activation:</strong> Tanh/Sigmoid</p>
+  </div>
+  <div class="layer-row">
+    <div class="layer-pill" style="background:rgba(91,141,240,0.15);border:1px solid rgba(91,141,240,0.4);color:var(--blue)">Input<br><small>32×32×1</small></div>
+    <div class="arr">→</div>
+    <div class="layer-pill" style="background:rgba(139,108,247,0.15);border:1px solid rgba(139,108,247,0.4);color:var(--purple)">Conv1<br><small>6@5×5</small></div>
+    <div class="arr">→</div>
+    <div class="layer-pill" style="background:rgba(245,166,35,0.15);border:1px solid rgba(245,166,35,0.4);color:var(--amber)">AvgPool<br><small>2×2</small></div>
+    <div class="arr">→</div>
+    <div class="layer-pill" style="background:rgba(139,108,247,0.15);border:1px solid rgba(139,108,247,0.4);color:var(--purple)">Conv2<br><small>16@5×5</small></div>
+    <div class="arr">→</div>
+    <div class="layer-pill" style="background:rgba(245,166,35,0.15);border:1px solid rgba(245,166,35,0.4);color:var(--amber)">AvgPool<br><small>2×2</small></div>
+    <div class="arr">→</div>
+    <div class="layer-pill" style="background:rgba(34,211,200,0.15);border:1px solid rgba(34,211,200,0.4);color:var(--teal)">FC×3<br><small>120→84→10</small></div>
+    <div class="arr">→</div>
+    <div class="layer-pill" style="background:rgba(61,214,140,0.15);border:1px solid rgba(61,214,140,0.4);color:var(--green)">Softmax<br><small>10 classes</small></div>
+  </div>
+
+  <h3>AlexNet (2012) — Krizhevsky, Sutskever, Hinton</h3>
+  <div class="box purple">
+    <div class="box-label">The Revolution — Start of Modern Deep Learning</div>
+    <p><strong>Won:</strong> ImageNet 2012 with 15.3% error (vs 26% for 2nd place) — an unprecedented gap</p>
+    <p><strong>Input:</strong> 227×227×3 color image | <strong>Parameters:</strong> ~60 million | <strong>Trained on:</strong> 2 GPUs (GTX 580)</p>
+  </div>
+  <div class="layer-row">
+    <div class="layer-pill" style="background:rgba(91,141,240,0.15);border:1px solid rgba(91,141,240,0.4);color:var(--blue)">Input<br><small>227×227×3</small></div>
+    <div class="arr">→</div>
+    <div class="layer-pill" style="background:rgba(139,108,247,0.15);border:1px solid rgba(139,108,247,0.4);color:var(--purple)">Conv1<br><small>96@11×11 s4</small></div>
+    <div class="arr">→</div>
+    <div class="layer-pill" style="background:rgba(245,166,35,0.15);border:1px solid rgba(245,166,35,0.4);color:var(--amber)">MaxPool</div>
+    <div class="arr">→</div>
+    <div class="layer-pill" style="background:rgba(139,108,247,0.15);border:1px solid rgba(139,108,247,0.4);color:var(--purple)">Conv2-5<br><small>256→384→256</small></div>
+    <div class="arr">→</div>
+    <div class="layer-pill" style="background:rgba(245,166,35,0.15);border:1px solid rgba(245,166,35,0.4);color:var(--amber)">MaxPool</div>
+    <div class="arr">→</div>
+    <div class="layer-pill" style="background:rgba(34,211,200,0.15);border:1px solid rgba(34,211,200,0.4);color:var(--teal)">FC+Drop<br><small>4096×2</small></div>
+    <div class="arr">→</div>
+    <div class="layer-pill" style="background:rgba(61,214,140,0.15);border:1px solid rgba(61,214,140,0.4);color:var(--green)">Softmax<br><small>1000</small></div>
+  </div>
+  <table>
+    <tr><th>AlexNet Innovation</th><th>Why It Mattered</th></tr>
+    <tr><td>ReLU instead of Tanh/Sigmoid</td><td>6× faster training, no vanishing gradient</td></tr>
+    <tr><td>Dropout (p=0.5) in FC layers</td><td>Dramatically reduced overfitting</td></tr>
+    <tr><td>Trained on 2 GPUs</td><td>Enabled training on 1.2M images in reasonable time</td></tr>
+    <tr><td>Data Augmentation</td><td>Random crops, horizontal flips → effectively 2048× more training data</td></tr>
+    <tr><td>Local Response Normalization</td><td>Inspired by lateral inhibition in biology</td></tr>
+  </table>
+
+  <h3>VGGNet (2014) — Simonyan & Zisserman (Oxford)</h3>
+  <div class="box teal">
+    <div class="box-label">Philosophy: "Use Only 3×3 Filters, Go Very Deep"</div>
+    <p><strong>Key Finding:</strong> Depth matters more than large filter sizes. Two 3×3 conv layers have the same receptive field as one 5×5 layer, but with more parameters and non-linearities.</p>
+    <p><strong>Result:</strong> VGG-16 (16 layers), VGG-19 (19 layers). 2nd place ImageNet 2014. Still widely used as feature extractor.</p>
+  </div>
+  <div class="g2">
+    <div class="box blue">
+      <div class="box-label">Why 3×3 is Special</div>
+      <ul>
+        <li>Two 3×3 layers = one 5×5 receptive field</li>
+        <li>Three 3×3 layers = one 7×7 receptive field</li>
+        <li>But 3×3 has fewer parameters: 2×(3×3) = 18 vs 5×5 = 25</li>
+        <li>More non-linearities (one ReLU per layer) → more expressive</li>
+      </ul>
+    </div>
+    <div class="box red">
+      <div class="box-label">VGGNet Weakness</div>
+      <ul>
+        <li>138 million parameters — very large model</li>
+        <li>Slow to train and deploy</li>
+        <li>Mostly in fully connected layers (FC has 122M of 138M params)</li>
+        <li>High memory consumption</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>ResNet (2015) — Kaiming He et al. (Microsoft Research)</h3>
+  <div class="box amber">
+    <div class="box-label">The Problem ResNet Solved</div>
+    <p>When adding more layers to VGG (going from 16 to 30 layers), training accuracy on training data actually got WORSE. Not overfitting (test error) — the training error itself increased! This is called the <strong>degradation problem</strong>.</p>
+    <p><strong>Expected:</strong> Deeper = better (or at least same). <strong>Observed:</strong> 30-layer network performed worse than 20-layer on training data. Why?</p>
+  </div>
+
+  <div class="box green">
+    <div class="box-label">ResNet's Solution — Residual Learning</div>
+    <p>Instead of learning the desired mapping H(x) directly, learn the <strong>residual</strong> F(x) = H(x) − x. The output becomes: <strong>H(x) = F(x) + x</strong></p>
+    <p>The identity mapping x is added via a "skip connection" that bypasses 2-3 layers. If the added layers aren't helpful, the network can simply learn F(x) = 0 → then output = 0 + x = x (identity). This is much easier to learn than direct identity mapping!</p>
+  </div>
+
+  <div class="svg-wrap">
+  <svg viewBox="0 0 500 200" width="100%" style="max-width:500px">
+    <!-- Input x -->
+    <rect x="10" y="85" width="60" height="30" rx="8" fill="rgba(91,141,240,0.2)" stroke="#5b8df0" stroke-width="1.5"/>
+    <text x="40" y="105" text-anchor="middle" font-family="IBM Plex Mono" font-size="13" fill="#7eb0ff">x</text>
+    <!-- Skip connection line (top) -->
+    <line x1="40" y1="85" x2="40" y2="45" stroke="rgba(61,214,140,0.7)" stroke-width="2"/>
+    <line x1="40" y1="45" x2="390" y2="45" stroke="rgba(61,214,140,0.7)" stroke-width="2" stroke-dasharray="6,3"/>
+    <line x1="390" y1="45" x2="390" y2="100" stroke="rgba(61,214,140,0.7)" stroke-width="2"/>
+    <text x="210" y="38" text-anchor="middle" font-family="IBM Plex Sans" font-size="10" fill="#3dd68c">Skip Connection (Identity Shortcut) — adds x directly</text>
+    <!-- Conv layers -->
+    <line x1="70" y1="100" x2="110" y2="100" stroke="#5b8df0" stroke-width="2"/>
+    <rect x="110" y="75" width="100" height="50" rx="10" fill="rgba(139,108,247,0.2)" stroke="#8b6cf7" stroke-width="1.5"/>
+    <text x="160" y="97" text-anchor="middle" font-family="IBM Plex Sans" font-size="11" fill="#c4b5fd">Conv 3×3</text>
+    <text x="160" y="112" text-anchor="middle" font-family="IBM Plex Sans" font-size="10" fill="#8b6cf7">BatchNorm+ReLU</text>
+    <line x1="210" y1="100" x2="250" y2="100" stroke="#5b8df0" stroke-width="2"/>
+    <rect x="250" y="75" width="100" height="50" rx="10" fill="rgba(139,108,247,0.2)" stroke="#8b6cf7" stroke-width="1.5"/>
+    <text x="300" y="97" text-anchor="middle" font-family="IBM Plex Sans" font-size="11" fill="#c4b5fd">Conv 3×3</text>
+    <text x="300" y="112" text-anchor="middle" font-family="IBM Plex Sans" font-size="10" fill="#8b6cf7">BatchNorm</text>
+    <line x1="350" y1="100" x2="370" y2="100" stroke="#5b8df0" stroke-width="2"/>
+    <!-- Addition node -->
+    <circle cx="390" cy="100" r="18" fill="rgba(61,214,140,0.15)" stroke="#3dd68c" stroke-width="2"/>
+    <text x="390" y="96" text-anchor="middle" font-family="IBM Plex Sans" font-size="16" font-weight="700" fill="#3dd68c">+</text>
+    <text x="390" y="111" text-anchor="middle" font-family="IBM Plex Sans" font-size="9" fill="#22c55e">F(x)+x</text>
+    <!-- ReLU output -->
+    <line x1="408" y1="100" x2="430" y2="100" stroke="#3dd68c" stroke-width="2"/>
+    <rect x="430" y="82" width="60" height="36" rx="8" fill="rgba(34,211,200,0.15)" stroke="#22d3c8" stroke-width="1.5"/>
+    <text x="460" y="104" text-anchor="middle" font-family="IBM Plex Sans" font-size="11" fill="#22d3c8">ReLU</text>
+    <!-- F(x) label -->
+    <text x="225" y="145" text-anchor="middle" font-family="IBM Plex Sans" font-size="11" fill="#8b6cf7">← F(x) = residual function learned by conv layers →</text>
+    <text x="225" y="160" text-anchor="middle" font-family="IBM Plex Mono" font-size="12" fill="#f5a623">Output = F(x) + x</text>
+    <text x="225" y="175" text-anchor="middle" font-family="IBM Plex Sans" font-size="10" fill="#6b7289">If F(x)=0, output=x (identity). Easy to learn!</text>
+  </svg>
+  </div>
+
+  <h3>ResNet Variants</h3>
+  <table>
+    <tr><th>Model</th><th>Layers</th><th>Params</th><th>Top-5 Error (ImageNet)</th></tr>
+    <tr><td>ResNet-18</td><td>18</td><td>11M</td><td>10.9%</td></tr>
+    <tr><td>ResNet-34</td><td>34</td><td>21M</td><td>10.0%</td></tr>
+    <tr><td>ResNet-50</td><td>50 (bottleneck)</td><td>25M</td><td>7.0%</td></tr>
+    <tr><td>ResNet-101</td><td>101</td><td>44M</td><td>6.4%</td></tr>
+    <tr><td>ResNet-152</td><td>152</td><td>60M</td><td>5.7%</td></tr>
+  </table>
+
+  <div class="box green">
+    <div class="box-label">ResNet Achievement</div>
+    <p>ResNet-152 achieved <strong>3.57% top-5 error</strong> on ImageNet 2015 — surpassing estimated human performance (~5.1%). First time a computer outperformed humans on this benchmark.</p>
+  </div>
+
+  <h3>All Four Architectures — Final Comparison</h3>
+  <table>
+    <tr><th>Architecture</th><th>Year</th><th>Author</th><th>Layers</th><th>Params</th><th>Key Innovation</th><th>Weakness</th></tr>
+    <tr><td>LeNet-5</td><td>1998</td><td>Yann LeCun</td><td>7</td><td>60K</td><td>First practical CNN, Avg Pooling</td><td>Too simple for ImageNet</td></tr>
+    <tr><td>AlexNet</td><td>2012</td><td>Krizhevsky et al.</td><td>8</td><td>60M</td><td>ReLU, Dropout, GPU training</td><td>Large filters (11×11), many params</td></tr>
+    <tr><td>VGG-16</td><td>2014</td><td>Simonyan &amp; Zisserman</td><td>16</td><td>138M</td><td>Only 3×3 filters, simplicity+depth</td><td>Too many params (138M)</td></tr>
+    <tr><td>ResNet-50</td><td>2015</td><td>Kaiming He et al.</td><td>50</td><td>25M</td><td>Skip connections, solves degradation</td><td>Still complex to implement</td></tr>
+  </table>
+</div>
+
+<!-- ══════════════════════════════ SECTION 14 ══════════════════════════════ -->
+<div class="section" id="s14">
+  <div class="section-badge"><div class="num">14</div><span>Sequences</span></div>
+  <h2>Recurrent Neural Networks (RNN)</h2>
+  <p class="tagline">CNNs are for spatial data. RNNs are for sequential data — where the order of inputs matters. Text, speech, time series, music.</p>
+
+  <h3>Why Can't CNN/MLP Handle Sequences?</h3>
+  <div class="box red">
+    <div class="box-label">The Problem</div>
+    <p>Consider sentence: "The cat sat on the mat." A feedforward ANN processes each word independently. It has no memory of previous words. So predicting the next word is impossible — you need context!</p>
+    <p>Also, sentences have variable length. MLP needs fixed-size input. RNN can handle any length.</p>
+  </div>
+
+  <h3>The Core RNN Mechanism</h3>
+  <div class="formula">hₜ = tanh(Wₕ·hₜ₋₁ + Wₓ·xₜ + b)</div>
+  <div class="formula">yₜ = Wᵧ·hₜ + bᵧ &nbsp;&nbsp;&nbsp;[if output needed at this step]</div>
+  <p>The key insight: <strong>hₜ₋₁</strong> (previous hidden state) acts as memory — it carries information from all previous time steps!</p>
+
+  <div class="svg-wrap">
+  <svg viewBox="0 0 620 200" width="100%" style="max-width:620px">
+    <!-- Time steps -->
+    <text x="80" y="18" text-anchor="middle" font-family="IBM Plex Sans" font-size="11" fill="#6b7289">t=1</text>
+    <text x="230" y="18" text-anchor="middle" font-family="IBM Plex Sans" font-size="11" fill="#6b7289">t=2</text>
+    <text x="380" y="18" text-anchor="middle" font-family="IBM Plex Sans" font-size="11" fill="#6b7289">t=3</text>
+    <text x="530" y="18" text-anchor="middle" font-family="IBM Plex Sans" font-size="11" fill="#6b7289">t=4</text>
+    <!-- RNN cells -->
+    <rect x="40" y="70" width="80" height="60" rx="12" fill="rgba(139,108,247,0.2)" stroke="#8b6cf7" stroke-width="2"/>
+    <text x="80" y="97" text-anchor="middle" font-family="IBM Plex Sans" font-size="12" font-weight="700" fill="#c4b5fd">RNN</text>
+    <text x="80" y="113" text-anchor="middle" font-family="IBM Plex Sans" font-size="11" fill="#8b6cf7">Cell</text>
+    <rect x="190" y="70" width="80" height="60" rx="12" fill="rgba(139,108,247,0.2)" stroke="#8b6cf7" stroke-width="2"/>
+    <text x="230" y="97" text-anchor="middle" font-family="IBM Plex Sans" font-size="12" font-weight="700" fill="#c4b5fd">RNN</text>
+    <text x="230" y="113" text-anchor="middle" font-family="IBM Plex Sans" font-size="11" fill="#8b6cf7">Cell</text>
+    <rect x="340" y="70" width="80" height="60" rx="12" fill="rgba(139,108,247,0.2)" stroke="#8b6cf7" stroke-width="2"/>
+    <text x="380" y="97" text-anchor="middle" font-family="IBM Plex Sans" font-size="12" font-weight="700" fill="#c4b5fd">RNN</text>
+    <text x="380" y="113" text-anchor="middle" font-family="IBM Plex Sans" font-size="11" fill="#8b6cf7">Cell</text>
+    <rect x="490" y="70" width="80" height="60" rx="12" fill="rgba(139,108,247,0.2)" stroke="#8b6cf7" stroke-width="2"/>
+    <text x="530" y="97" text-anchor="middle" font-family="IBM Plex Sans" font-size="12" font-weight="700" fill="#c4b5fd">RNN</text>
+    <text x="530" y="113" text-anchor="middle" font-family="IBM Plex Sans" font-size="11" fill="#8b6cf7">Cell</text>
+    <!-- Hidden state arrows (horizontal) -->
+    <line x1="120" y1="100" x2="190" y2="100" stroke="#22d3c8" stroke-width="2.5"/>
+    <polygon points="186,95 195,100 186,105" fill="#22d3c8"/>
+    <text x="155" y="94" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" fill="#22d3c8">h₁</text>
+    <line x1="270" y1="100" x2="340" y2="100" stroke="#22d3c8" stroke-width="2.5"/>
+    <polygon points="336,95 345,100 336,105" fill="#22d3c8"/>
+    <text x="305" y="94" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" fill="#22d3c8">h₂</text>
+    <line x1="420" y1="100" x2="490" y2="100" stroke="#22d3c8" stroke-width="2.5"/>
+    <polygon points="486,95 495,100 486,105" fill="#22d3c8"/>
+    <text x="455" y="94" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" fill="#22d3c8">h₃</text>
+    <!-- Input arrows (up) -->
+    <line x1="80" y1="180" x2="80" y2="130" stroke="#5b8df0" stroke-width="2"/>
+    <polygon points="75,134 80,125 85,134" fill="#5b8df0"/>
+    <text x="80" y="195" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#5b8df0">"The"</text>
+    <line x1="230" y1="180" x2="230" y2="130" stroke="#5b8df0" stroke-width="2"/>
+    <polygon points="225,134 230,125 235,134" fill="#5b8df0"/>
+    <text x="230" y="195" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#5b8df0">"cat"</text>
+    <line x1="380" y1="180" x2="380" y2="130" stroke="#5b8df0" stroke-width="2"/>
+    <polygon points="375,134 380,125 385,134" fill="#5b8df0"/>
+    <text x="380" y="195" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#5b8df0">"sat"</text>
+    <line x1="530" y1="180" x2="530" y2="130" stroke="#5b8df0" stroke-width="2"/>
+    <polygon points="525,134 530,125 535,134" fill="#5b8df0"/>
+    <text x="530" y="195" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#5b8df0">"on"</text>
+    <!-- Output arrows (up) -->
+    <line x1="80" y1="70" x2="80" y2="38" stroke="#3dd68c" stroke-width="1.5" stroke-dasharray="4,3"/>
+    <line x1="230" y1="70" x2="230" y2="38" stroke="#3dd68c" stroke-width="1.5" stroke-dasharray="4,3"/>
+    <line x1="380" y1="70" x2="380" y2="38" stroke="#3dd68c" stroke-width="1.5" stroke-dasharray="4,3"/>
+    <line x1="530" y1="70" x2="530" y2="38" stroke="#3dd68c" stroke-width="2"/>
+    <polygon points="525,42 530,33 535,42" fill="#3dd68c"/>
+    <text x="530" y="26" text-anchor="middle" font-family="IBM Plex Sans" font-size="10" fill="#3dd68c">ŷ₄</text>
+    <text x="4" y="38" font-family="IBM Plex Sans" font-size="9" fill="#6b7289">outputs</text>
+    <text x="4" y="95" font-family="IBM Plex Mono" font-size="9" fill="#22d3c8">h state→</text>
+    <text x="4" y="183" font-family="IBM Plex Sans" font-size="9" fill="#5b8df0">inputs</text>
+  </svg>
+  </div>
+
+  <h3>Types of RNN Architectures</h3>
+  <table>
+    <tr><th>Type</th><th>Input → Output Pattern</th><th>Use Cases</th><th>Example</th></tr>
+    <tr><td>One-to-One</td><td>1 input → 1 output</td><td>Regular classification/regression</td><td>Image classification (no memory needed)</td></tr>
+    <tr><td>One-to-Many</td><td>1 input → sequence output</td><td>Generative tasks</td><td>Image → generate caption words one by one</td></tr>
+    <tr><td>Many-to-One</td><td>Sequence input → 1 output</td><td>Classification of sequences</td><td>Movie review → positive/negative sentiment</td></tr>
+    <tr><td>Many-to-Many (sync)</td><td>Sequence → same-length sequence</td><td>Labeling every element</td><td>Word → POS tag at each position</td></tr>
+    <tr><td>Many-to-Many (async)</td><td>Sequence → different-length sequence</td><td>Sequence transformation</td><td>English sentence → French sentence (translation)</td></tr>
+  </table>
+
+  <h3>BPTT — Backpropagation Through Time</h3>
+  <p>Training RNNs uses BPTT — the RNN is "unrolled" across time steps, and standard backpropagation is applied to this unrolled graph.</p>
+  <div class="box red">
+    <div class="box-label">The Vanishing Gradient Problem in RNNs</div>
+    <p>For a sequence of length T, the gradient of the first time step involves T multiplications of small numbers (gradients &lt; 1). After 50+ steps, the gradient ≈ 0 → the network completely forgets early context.</p>
+    <p><strong>Example:</strong> "The cat, which was very hungry after waiting for hours, finally ___." The blank should be "ate" — but "cat" (the subject) is 8+ words back. Simple RNN fails to connect them.</p>
+    <p><strong>Solution:</strong> LSTM and GRU (next section)</p>
+  </div>
+</div>
+
+<!-- ══════════════════════════════ SECTION 15 ══════════════════════════════ -->
+<div class="section" id="s15">
+  <div class="section-badge"><div class="num">15</div><span>Memory</span></div>
+  <h2>LSTM & GRU — Solving the Memory Problem</h2>
+  <p class="tagline">LSTM and GRU use gating mechanisms to selectively remember and forget information, solving the vanishing gradient problem in RNNs.</p>
+
+  <h3>LSTM — Long Short-Term Memory (1997)</h3>
+  <p>Proposed by <strong>Hochreiter & Schmidhuber (1997)</strong>. Uses a <strong>cell state Cₜ</strong> (the "long-term memory highway") and 3 gates to control information flow.</p>
+
+  <div class="box blue">
+    <div class="box-label">The Cell State — The Key Idea</div>
+    <p>The cell state Cₜ is a separate "conveyor belt" that runs through the entire sequence with only minor, controlled modifications. Information can flow unchanged over many steps. This is what enables long-term memory.</p>
+  </div>
+
+  <h4>LSTM's 3 Gates — Explained in Detail</h4>
+  <div class="g3">
+    <div class="box red">
+      <div class="box-label">1. Forget Gate (fₜ)</div>
+      <p><strong>Formula:</strong> fₜ = σ(Wf·[hₜ₋₁, xₜ] + bf)</p>
+      <p><strong>Output:</strong> [0, 1] for each cell state value</p>
+      <p><strong>Meaning:</strong> 0 = completely forget this memory; 1 = completely keep this memory</p>
+      <p><strong>Example:</strong> Reading a new subject in a paragraph → forget the old subject's gender</p>
+    </div>
+    <div class="box teal">
+      <div class="box-label">2. Input Gate (iₜ) + Candidate</div>
+      <p><strong>Formula:</strong> iₜ = σ(Wi·[hₜ₋₁, xₜ] + bi)</p>
+      <p><strong>Candidate:</strong> C̃ₜ = tanh(Wc·[hₜ₋₁, xₜ] + bc)</p>
+      <p><strong>Meaning:</strong> Which new information to add to cell state?</p>
+      <p><strong>Example:</strong> New subject appears → store its gender in cell state</p>
+    </div>
+    <div class="box purple">
+      <div class="box-label">3. Output Gate (oₜ)</div>
+      <p><strong>Formula:</strong> oₜ = σ(Wo·[hₜ₋₁, xₜ] + bo)</p>
+      <p><strong>Output:</strong> hₜ = oₜ ⊙ tanh(Cₜ)</p>
+      <p><strong>Meaning:</strong> What part of cell state to output as hidden state?</p>
+      <p><strong>Example:</strong> If next word is a verb, output relevant subject info</p>
+    </div>
+  </div>
+
+  <h4>LSTM Cell State Update</h4>
+  <div class="formula">Cₜ = fₜ ⊙ Cₜ₋₁ + iₜ ⊙ C̃ₜ</div>
+  <p>⊙ = element-wise multiplication. <strong>Forget gate</strong> removes old info. <strong>Input gate</strong> adds new info. The cell state is updated smoothly, avoiding vanishing gradients!</p>
+
+  <h3>GRU — Gated Recurrent Unit (2014)</h3>
+  <p>Proposed by <strong>Cho et al. (2014)</strong>. Simplifies LSTM — merges cell state + hidden state, and uses only 2 gates:</p>
+  <div class="g2">
+    <div class="box blue">
+      <div class="box-label">Reset Gate (rₜ)</div>
+      <p><strong>rₜ = σ(Wr·[hₜ₋₁, xₜ])</strong></p>
+      <p>Controls how much of the past hidden state to use when computing the new candidate. rₜ≈0 → ignore past; rₜ≈1 → use all past.</p>
+    </div>
+    <div class="box teal">
+      <div class="box-label">Update Gate (zₜ)</div>
+      <p><strong>zₜ = σ(Wz·[hₜ₋₁, xₜ])</strong></p>
+      <p>Controls how much of old hidden state to keep vs. new candidate. Combines LSTM's forget + input gate into one.</p>
+    </div>
+  </div>
+  <div class="formula">h̃ₜ = tanh(W·[rₜ⊙hₜ₋₁, xₜ]) &nbsp;&nbsp;&nbsp; hₜ = (1−zₜ)⊙hₜ₋₁ + zₜ⊙h̃ₜ</div>
+
+  <h3>LSTM vs GRU — Which to Use?</h3>
+  <table>
+    <tr><th>Aspect</th><th>LSTM</th><th>GRU</th></tr>
+    <tr><td>Gates</td><td>3 (forget, input, output) + cell state</td><td>2 (reset, update)</td></tr>
+    <tr><td>Parameters</td><td>More (~4× compared to vanilla RNN)</td><td>Fewer (~3× compared to vanilla RNN)</td></tr>
+    <tr><td>Training Speed</td><td>Slower</td><td>Faster</td></tr>
+    <tr><td>Performance</td><td>Usually slightly better on long sequences</td><td>Comparable on most tasks</td></tr>
+    <tr><td>Memory</td><td>More memory usage</td><td>Less memory</td></tr>
+    <tr><td>Best Use</td><td>Very long sequences, complex patterns</td><td>Most tasks — good default choice</td></tr>
+  </table>
+</div>
+
+<!-- ══════════════════════════════ SECTION 16 ══════════════════════════════ -->
+<div class="section" id="s16">
+  <div class="section-badge"><div class="num">16</div><span>Context</span></div>
+  <h2>Bidirectional RNN (Bi-RNN)</h2>
+  <p class="tagline">Regular RNNs only look at past context. Bidirectional RNNs read the sequence both forward and backward to understand the full context at every position.</p>
+
+  <h3>The Motivation</h3>
+  <div class="box amber">
+    <div class="box-label">Why We Need Future Context</div>
+    <p>Consider: "I went to the bank to deposit money." vs "I sat on the river bank and fished."</p>
+    <p>The word "bank" means something different in each sentence. To correctly understand "bank", you need to see words that come AFTER it ("deposit money" vs "fished"). A forward-only RNN can't do this!</p>
+    <p>In NLP tasks like Named Entity Recognition, POS tagging, machine translation — both past and future context are essential.</p>
+  </div>
+
+  <h3>Architecture</h3>
+  <div class="svg-wrap">
+  <svg viewBox="0 0 600 220" width="100%" style="max-width:600px">
+    <!-- Words -->
+    <text x="80" y="200" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#5b8df0">"I"</text>
+    <text x="210" y="200" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#5b8df0">"love"</text>
+    <text x="340" y="200" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#5b8df0">"deep"</text>
+    <text x="470" y="200" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#5b8df0">"learning"</text>
+    <!-- Input arrows -->
+    <line x1="80" y1="192" x2="80" y2="170" stroke="#5b8df0" stroke-width="1.5"/>
+    <line x1="210" y1="192" x2="210" y2="170" stroke="#5b8df0" stroke-width="1.5"/>
+    <line x1="340" y1="192" x2="340" y2="170" stroke="#5b8df0" stroke-width="1.5"/>
+    <line x1="470" y1="192" x2="470" y2="170" stroke="#5b8df0" stroke-width="1.5"/>
+    <!-- Forward RNN cells -->
+    <text x="20" y="150" font-family="IBM Plex Sans" font-size="10" font-weight="700" fill="#3dd68c">Forward →</text>
+    <rect x="50" y="140" width="60" height="32" rx="8" fill="rgba(61,214,140,0.15)" stroke="#3dd68c" stroke-width="1.5"/>
+    <text x="80" y="160" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" fill="#3dd68c">h⃗₁</text>
+    <line x1="110" y1="156" x2="180" y2="156" stroke="#3dd68c" stroke-width="1.8"/>
+    <polygon points="177,151 186,156 177,161" fill="#3dd68c"/>
+    <rect x="180" y="140" width="60" height="32" rx="8" fill="rgba(61,214,140,0.15)" stroke="#3dd68c" stroke-width="1.5"/>
+    <text x="210" y="160" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" fill="#3dd68c">h⃗₂</text>
+    <line x1="240" y1="156" x2="310" y2="156" stroke="#3dd68c" stroke-width="1.8"/>
+    <polygon points="307,151 316,156 307,161" fill="#3dd68c"/>
+    <rect x="310" y="140" width="60" height="32" rx="8" fill="rgba(61,214,140,0.15)" stroke="#3dd68c" stroke-width="1.5"/>
+    <text x="340" y="160" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" fill="#3dd68c">h⃗₃</text>
+    <line x1="370" y1="156" x2="440" y2="156" stroke="#3dd68c" stroke-width="1.8"/>
+    <polygon points="437,151 446,156 437,161" fill="#3dd68c"/>
+    <rect x="440" y="140" width="60" height="32" rx="8" fill="rgba(61,214,140,0.15)" stroke="#3dd68c" stroke-width="1.5"/>
+    <text x="470" y="160" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" fill="#3dd68c">h⃗₄</text>
+    <!-- Backward RNN cells -->
+    <text x="20" y="108" font-family="IBM Plex Sans" font-size="10" font-weight="700" fill="#f06565">← Backward</text>
+    <rect x="50" y="80" width="60" height="32" rx="8" fill="rgba(240,101,101,0.15)" stroke="#f06565" stroke-width="1.5"/>
+    <text x="80" y="100" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" fill="#f06565">h⃖₁</text>
+    <line x1="110" y1="96" x2="180" y2="96" stroke="#f06565" stroke-width="1.8"/>
+    <polygon points="113,91 110,96 113,101" fill="#f06565"/>
+    <rect x="180" y="80" width="60" height="32" rx="8" fill="rgba(240,101,101,0.15)" stroke="#f06565" stroke-width="1.5"/>
+    <text x="210" y="100" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" fill="#f06565">h⃖₂</text>
+    <line x1="240" y1="96" x2="310" y2="96" stroke="#f06565" stroke-width="1.8"/>
+    <polygon points="243,91 240,96 243,101" fill="#f06565"/>
+    <rect x="310" y="80" width="60" height="32" rx="8" fill="rgba(240,101,101,0.15)" stroke="#f06565" stroke-width="1.5"/>
+    <text x="340" y="100" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" fill="#f06565">h⃖₃</text>
+    <line x1="370" y1="96" x2="440" y2="96" stroke="#f06565" stroke-width="1.8"/>
+    <polygon points="373,91 370,96 373,101" fill="#f06565"/>
+    <rect x="440" y="80" width="60" height="32" rx="8" fill="rgba(240,101,101,0.15)" stroke="#f06565" stroke-width="1.5"/>
+    <text x="470" y="100" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" fill="#f06565">h⃖₄</text>
+    <!-- Concatenation and output -->
+    <text x="80" y="68" text-anchor="middle" font-family="IBM Plex Mono" font-size="9" fill="#a78bfa">[h⃗₁; h⃖₁]</text>
+    <text x="210" y="68" text-anchor="middle" font-family="IBM Plex Mono" font-size="9" fill="#a78bfa">[h⃗₂; h⃖₂]</text>
+    <text x="340" y="68" text-anchor="middle" font-family="IBM Plex Mono" font-size="9" fill="#a78bfa">[h⃗₃; h⃖₃]</text>
+    <text x="470" y="68" text-anchor="middle" font-family="IBM Plex Mono" font-size="9" fill="#a78bfa">[h⃗₄; h⃖₄]</text>
+    <text x="80" y="56" text-anchor="middle" font-family="IBM Plex Sans" font-size="9" fill="#6b7289">ŷ₁</text>
+    <text x="210" y="56" text-anchor="middle" font-family="IBM Plex Sans" font-size="9" fill="#6b7289">ŷ₂</text>
+    <text x="340" y="56" text-anchor="middle" font-family="IBM Plex Sans" font-size="9" fill="#6b7289">ŷ₃</text>
+    <text x="470" y="56" text-anchor="middle" font-family="IBM Plex Sans" font-size="9" fill="#6b7289">ŷ₄</text>
+    <text x="300" y="22" text-anchor="middle" font-family="IBM Plex Sans" font-size="11" font-weight="700" fill="#a78bfa">Output: concat(forward, backward) at each step</text>
+  </svg>
+  </div>
+
+  <p>At each position, the output is the <strong>concatenation</strong> (or sum) of the forward and backward hidden states: <strong>yₜ = [h⃗ₜ ; h⃖ₜ]</strong></p>
+
+  <h3>Applications</h3>
+  <table>
+    <tr><th>Task</th><th>Why Bidirectional Helps</th></tr>
+    <tr><td>Named Entity Recognition (NER)</td><td>"Apple Inc. is a company" vs "I ate an apple" — need full sentence context to classify "Apple"</td></tr>
+    <tr><td>POS Tagging</td><td>"Can you help?" — "can" is auxiliary verb; seeing "help" after confirms it</td></tr>
+    <tr><td>Machine Translation (encoding)</td><td>Encoder reads entire source sentence before generating translation</td></tr>
+    <tr><td>Speech Recognition</td><td>Acoustic context from both sides helps disambiguate phonemes</td></tr>
+    <tr><td>BERT</td><td>Pre-trained using masked language modeling — uses both directions</td></tr>
+  </table>
+
+  <div class="box red">
+    <div class="box-label">Bi-RNN Limitation</div>
+    <p>Cannot be used for real-time generation tasks (like chatbots, speech synthesis) because you need the entire sequence before processing any part. For generation, use standard left-to-right RNNs.</p>
+  </div>
+</div>
+
+<!-- ══════════════════════════════ SECTION 17 ══════════════════════════════ -->
+<div class="section" id="s17">
+  <div class="section-badge"><div class="num">17</div><span>NLP</span></div>
+  <h2>NLP Pipeline — Complete Guide</h2>
+  <p class="tagline">Raw text cannot be fed directly into machine learning models. The NLP pipeline transforms messy human text into numerical representations that models can learn from.</p>
+
+  <h3>Full Pipeline Overview</h3>
+  <div class="diagram"><span class="dn">Raw Text Input</span>
+"The quick brown foxes are RUNNING across the Fields!! Visit http://example.com"
+   ↓
+<span class="dl">STEP 1 — Text Cleaning</span>
+ • Remove URLs, HTML tags, special characters
+ • Fix encoding issues (UTF-8)
+ • Lowercase: "the quick brown foxes are running across the fields"
+   ↓
+<span class="dl">STEP 2 — Tokenization</span>
+ • Split into tokens: ["the","quick","brown","foxes","are","running","across","the","fields"]
+   ↓
+<span class="dl">STEP 3 — Stop Word Removal</span>
+ • Remove: "the", "are", "across"
+ • Result: ["quick","brown","foxes","running","fields"]
+   ↓
+<span class="dl">STEP 4 — Stemming / Lemmatization</span>
+ • Stem: "foxes"→"fox", "running"→"run", "fields"→"field"
+ • Result: ["quick","brown","fox","run","field"]
+   ↓
+<span class="dl">STEP 5 — POS Tagging / NER</span>
+ • Tag: quick(JJ), brown(JJ), fox(NN), run(VB), field(NN)
+   ↓
+<span class="dl">STEP 6 — Vectorization / Embeddings</span>
+ • Convert each token to a dense numerical vector
+ • "fox" → [0.23, -0.81, 0.45, ..., 0.12] (300 dimensions)
+   ↓
+<span class="dn">Numerical Matrix → Input to ML/DL Model</span></div>
+
+  <h3>Step 1 — Tokenization in Depth</h3>
+  <table>
+    <tr><th>Type</th><th>How</th><th>Example</th><th>Use</th></tr>
+    <tr><td>Word Tokenization</td><td>Split on whitespace + punctuation</td><td>"I'm here" → ["I", "'m", "here"]</td><td>Most NLP tasks</td></tr>
+    <tr><td>Sentence Tokenization</td><td>Split on sentence boundaries</td><td>Paragraph → List of sentences</td><td>Summarization, MT</td></tr>
+    <tr><td>Character Tokenization</td><td>Each character is a token</td><td>"cat" → ["c","a","t"]</td><td>Typo robustness</td></tr>
+    <tr><td>Subword (BPE)</td><td>Byte Pair Encoding — frequent subwords</td><td>"playing" → ["play","##ing"]</td><td>BERT, GPT, modern LLMs</td></tr>
+  </table>
+
+  <h3>Step 2 — Stop Words</h3>
+  <p>Stop words are high-frequency words with little semantic meaning. Removing them reduces noise and dimensionality.</p>
+  <p>Common stop words: <span class="badge bb">the</span><span class="badge bb">is</span><span class="badge bb">are</span><span class="badge bb">a</span><span class="badge bb">an</span><span class="badge bb">at</span><span class="badge bb">which</span><span class="badge bb">on</span><span class="badge bb">in</span><span class="badge bb">of</span><span class="badge bb">it</span></p>
+  <div class="box amber">
+    <div class="box-label">When NOT to Remove Stop Words</div>
+    <p>Sentiment analysis: "not good" → removing "not" → "good" = completely wrong!</p>
+    <p>Question answering, translation: stop words carry grammatical meaning.</p>
+    <p>Modern neural models (BERT, GPT) don't remove stop words — they process the full sequence.</p>
+  </div>
+
+  <h3>Step 3 — Stemming vs Lemmatization</h3>
+  <table>
+    <tr><th></th><th>Stemming</th><th>Lemmatization</th></tr>
+    <tr><td>Definition</td><td>Remove suffixes by rules (crude chopping)</td><td>Return dictionary base form using linguistic knowledge</td></tr>
+    <tr><td>"running" →</td><td>"run" ✓</td><td>"run" ✓</td></tr>
+    <tr><td>"studies" →</td><td>"studi" ✗ (not a word!)</td><td>"study" ✓</td></tr>
+    <tr><td>"better" →</td><td>"better" (no change)</td><td>"good" ✓ (knows comparative form)</td></tr>
+    <tr><td>"flies" →</td><td>"fli" ✗</td><td>"fly" ✓ (understands context)</td></tr>
+    <tr><td>Speed</td><td>Fast (simple rules)</td><td>Slower (needs dictionary)</td></tr>
+    <tr><td>Algorithm</td><td>Porter Stemmer, Snowball, Lancaster</td><td>WordNet Lemmatizer, spaCy, NLTK</td></tr>
+    <tr><td>Use when</td><td>Speed matters, accuracy less critical</td><td>Accuracy matters (most cases)</td></tr>
+  </table>
+
+  <h3>Step 4 — POS Tagging</h3>
+  <div class="box teal">
+    <div class="box-label">POS Tag Examples</div>
+    <p style="font-family:'IBM Plex Mono',monospace;">"The quick fox jumps over the lazy dog"</p>
+    <p>The(DT) quick(JJ) fox(NN) jumps(VBZ) over(IN) the(DT) lazy(JJ) dog(NN)</p>
+    <p>DT=Determiner, JJ=Adjective, NN=Noun, VBZ=Verb 3rd person singular present, IN=Preposition</p>
+  </div>
+
+  <h3>Step 5 — Named Entity Recognition (NER)</h3>
+  <div class="box purple">
+    <div class="box-label">NER Example</div>
+    <p>"<strong style="color:var(--pink)">Elon Musk</strong>[PERSON] founded <strong style="color:var(--blue)">Tesla</strong>[ORG] in <strong style="color:var(--amber)">2003</strong>[DATE] in <strong style="color:var(--teal)">Palo Alto</strong>[LOCATION]."</p>
+    <p>NER entity types: PERSON, ORGANIZATION, LOCATION, DATE, TIME, MONEY, PERCENT, PRODUCT</p>
+  </div>
+
+  <h3>Step 6 — Text Vectorization Methods</h3>
+  <h4>Bag of Words (BoW)</h4>
+  <p>Create a vocabulary of all unique words. Represent each document as a vector of word counts.</p>
+  <div class="box blue">
+    <div class="box-label">BoW Example</div>
+    <p>Vocabulary: ["cat", "dog", "mat", "sat"]</p>
+    <p>"cat sat on mat" → [1, 0, 1, 1] (cat=1, dog=0, mat=1, sat=1)</p>
+    <p><strong>Problems:</strong> Ignores word order. Sparse high-dimensional vectors. No semantic meaning.</p>
+  </div>
+
+  <h4>TF-IDF (Term Frequency — Inverse Document Frequency)</h4>
+  <div class="formula">TF(t,d) = count(t in d) / total words in d</div>
+  <div class="formula">IDF(t) = log(N / df(t))  &nbsp;&nbsp;&nbsp; [N = total docs, df(t) = docs containing term t]</div>
+  <div class="formula">TF-IDF(t,d) = TF(t,d) × IDF(t)</div>
+  <div class="box teal">
+    <div class="box-label">TF-IDF Intuition</div>
+    <p>Word "the" appears in all documents → IDF ≈ 0 → TF-IDF ≈ 0 (filtered out)</p>
+    <p>Word "photosynthesis" appears in few docs → high IDF → high TF-IDF when it appears (important!)</p>
+    <p>TF-IDF automatically identifies the most informative words in each document relative to the corpus.</p>
+  </div>
+
+  <h4>Word Embeddings — Word2Vec & GloVe</h4>
+  <p>Instead of sparse one-hot vectors (50,000 dimensions), map each word to a dense vector (100-300 dimensions) that captures semantic meaning.</p>
+  <table>
+    <tr><th>Method</th><th>Approach</th><th>Key Property</th></tr>
+    <tr><td>One-Hot Encoding</td><td>"cat" = [0,0,...,1,...,0] (50K dims)</td><td>No semantic info; orthogonal vectors</td></tr>
+    <tr><td>Word2Vec (CBOW)</td><td>Predict target word from context words</td><td>Similar words → similar vectors; linear relationships</td></tr>
+    <tr><td>Word2Vec (Skip-gram)</td><td>Predict context words from target word</td><td>Better for rare words; slower to train</td></tr>
+    <tr><td>GloVe</td><td>Factorize word co-occurrence matrix</td><td>Captures global corpus statistics</td></tr>
+    <tr><td>FastText</td><td>Word2Vec + subword embeddings</td><td>Handles out-of-vocabulary words</td></tr>
+    <tr><td>BERT Embeddings</td><td>Transformer, context-dependent</td><td>"bank" has different vectors in different sentences</td></tr>
+  </table>
+
+  <div class="box green">
+    <div class="box-label">The Famous Word2Vec Arithmetic</div>
+    <p>Word2Vec learns embeddings where semantic relationships become vector arithmetic:</p>
+    <p><strong>vector("King") − vector("Man") + vector("Woman") ≈ vector("Queen")</strong></p>
+    <p><strong>vector("Paris") − vector("France") + vector("Germany") ≈ vector("Berlin")</strong></p>
+    <p>The model has learned concepts like royalty, gender, and country-capital relationships — purely from co-occurrence patterns in text!</p>
+  </div>
+</div>
+
+<!-- ══════════════════════════════ MCQ SECTION ══════════════════════════════ -->
+<div class="section" id="mcq">
+  <div class="mcq-hero">
+    <h2>⭐ 50 MCQ — Full Practice Exam</h2>
+    <p>Click any option to check your answer instantly. Full explanations included.</p>
+  </div>
+
+  <div class="score-row">
+    <div class="sc-cell"><div class="v" id="sa">0</div><div class="l">Answered</div></div>
+    <div class="sc-cell"><div class="v" id="sc" style="color:var(--green)">0</div><div class="l">Correct ✓</div></div>
+    <div class="sc-cell"><div class="v" id="sw" style="color:var(--red)">0</div><div class="l">Wrong ✗</div></div>
+    <div class="sc-cell"><div class="v" id="ss">0%</div><div class="l">Score</div></div>
+  </div>
+  <div class="prog-bar"><div class="prog-fill" id="pf"></div></div>
+
+  <div id="qc"></div>
+  <button class="btn-reset" onclick="resetQ()">🔄 Reset All Answers</button>
+</div>
+
+</main>
+</div>
+
+<script>
+// Sidebar active tracking
+document.querySelectorAll('.nav-item').forEach(n=>n.addEventListener('click',()=>{
+  document.querySelectorAll('.nav-item').forEach(x=>x.classList.remove('active'));
+  n.classList.add('active');
+}));
+function goto(id){document.getElementById(id).scrollIntoView({behavior:'smooth',block:'start'});}
+
+// MCQ DATA
+const Q=[
+  {q:"What is a Perceptron?",o:["A multi-layer neural network","A mathematical model of a single neuron that makes a binary decision","A convolutional filter","An optimization algorithm"],a:1,e:"A perceptron (Rosenblatt, 1958) is the simplest artificial neuron: weighted sum of inputs + bias → activation function → binary output."},
+  {q:"Which scientist invented the Perceptron?",o:["Geoffrey Hinton","Yann LeCun","Frank Rosenblatt","Alan Turing"],a:2,e:"Frank Rosenblatt invented the Perceptron in 1958 at Cornell Aeronautical Laboratory, inspired by biological neurons."},
+  {q:"What is the perceptron learning rule?",o:["w = w + η×(y−ŷ)×x","w = w − η×∂L/∂w","w = w × (1 + η)","w = w / (y + ŷ)"],a:0,e:"Perceptron learning rule: wᵢ(new) = wᵢ(old) + η×(y−ŷ)×xᵢ. If prediction is correct, no update needed. If wrong, adjust proportionally."},
+  {q:"Why can't a single perceptron solve the XOR problem?",o:["It has too few weights","XOR is not linearly separable — no single hyperplane can divide the classes","It requires too much memory","Its activation function is wrong"],a:1,e:"XOR: (0,0)→0, (0,1)→1, (1,0)→1, (1,1)→0. Plotting these points, no single straight line separates 0s from 1s. MLP with hidden layer can solve it."},
+  {q:"In an ANN, what does the hidden layer do?",o:["Receives raw input data","Learns increasingly abstract representations/features from data","Produces the final output","Calculates the loss"],a:1,e:"Hidden layers transform data into increasingly abstract representations. Layer 1 might learn edges; Layer 2 shapes; Layer 3 objects. This is why more hidden layers = more expressive model."},
+  {q:"What is Backpropagation?",o:["Method to feed data forward through layers","Algorithm using chain rule to compute gradients and update weights backward through the network","Process of normalizing input data","Technique for adding layers"],a:1,e:"Backpropagation: (1) Forward pass → compute output, (2) Calculate loss, (3) Use chain rule to compute ∂L/∂w for every weight, (4) Update weights via gradient descent."},
+  {q:"What is the formula for the gradient descent weight update?",o:["w = w + η×∂L/∂w","w = w − η×∂L/∂w","w = w × η","w = w − (∂L/∂w)²"],a:1,e:"w = w − η×∂L/∂w. We subtract because the gradient points uphill (toward increasing loss). Moving opposite to the gradient minimizes loss."},
+  {q:"What is the output range of the Sigmoid activation function?",o:["(−∞, +∞)","[−1, 1]","(0, 1)","[0, +∞)"],a:2,e:"Sigmoid σ(z) = 1/(1+e⁻ᶻ) outputs strictly between 0 and 1 (never exactly 0 or 1). Perfect for outputting probabilities."},
+  {q:"What is the formula for ReLU activation?",o:["max(0, z)","1/(1+e⁻ᶻ)","(eᶻ−e⁻ᶻ)/(eᶻ+e⁻ᶻ)","z² for z>0"],a:0,e:"ReLU (Rectified Linear Unit) = max(0,z). Outputs 0 for negative inputs, and z itself for positive inputs. Simple, fast, no vanishing gradient for z>0."},
+  {q:"What is the 'Dying ReLU' problem?",o:["ReLU is too slow to compute","Neurons whose input is always negative get zero gradient and never update","ReLU outputs are too large","ReLU doesn't work for multi-class problems"],a:1,e:"When a neuron's output is always ≤0, ReLU outputs 0 and gradient=0. Weight never updates → neuron is 'dead'. Fixed by Leaky ReLU (f(z)=0.01z for z≤0)."},
+  {q:"Which activation function is used for multi-class classification output?",o:["ReLU","Sigmoid","Tanh","Softmax"],a:3,e:"Softmax: f(xᵢ) = eˣⁱ/Σeˣʲ. Converts raw scores (logits) to probabilities that sum to exactly 1. Each value ∈ (0,1). Standard for multi-class classification."},
+  {q:"What causes the Vanishing Gradient Problem?",o:["Too many neurons in hidden layers","Gradients becoming near-zero during backpropagation through many layers with saturating activations","Learning rate being too large","Having too few training samples"],a:1,e:"With sigmoid/tanh, derivative is at most 0.25/1.0. Multiplied through many layers: 0.25^20 ≈ 10^-12. Gradients vanish → early layers don't learn. Solution: ReLU."},
+  {q:"What is Dropout?",o:["Removing training examples","Randomly setting neuron outputs to 0 during training to prevent overfitting","Reducing the learning rate","Removing duplicate weights"],a:1,e:"Dropout randomly deactivates p fraction of neurons at each training step. Forces redundant representations, prevents co-adaptation, acts like training an ensemble of networks."},
+  {q:"What is Batch Normalization?",o:["Dividing data into mini-batches","Normalizing the activations of each layer to have zero mean and unit variance across the batch","Shuffling training data","Removing outlier samples"],a:1,e:"BatchNorm normalizes: x̂ = (x−μ_batch)/σ_batch, then y = γx̂+β (learnable scale and shift). Stabilizes training, reduces internal covariate shift, allows higher learning rates."},
+  {q:"What is the Curse of Dimensionality?",o:["Having too many neurons in a layer","Exponential growth of data required as feature dimensions increase, causing sparsity","Using too deep a network","Having more classes than training examples"],a:1,e:"Coined by Bellman (1961). With d dimensions, data density decreases exponentially. To maintain density, need N^d samples. Distances become meaningless. Models overfit."},
+  {q:"Which technique reduces dimensionality by finding directions of maximum variance?",o:["Dropout","t-SNE","PCA (Principal Component Analysis)","Batch Normalization"],a:2,e:"PCA finds orthogonal axes (principal components) in order of explained variance. Project data onto top-k components. Linear method, often used as preprocessing step."},
+  {q:"What is a Convolutional Filter/Kernel?",o:["A regularization technique","A small weight matrix that slides across input to detect specific features","The output of a pooling layer","A type of activation function"],a:1,e:"A filter is a small matrix (e.g., 3×3) of learnable weights. It slides across the input performing element-wise multiply+sum, producing one value per position in the feature map."},
+  {q:"What does Max Pooling do?",o:["Multiplies all values by the maximum","Takes the largest value from each spatial window","Normalizes feature maps","Increases spatial resolution"],a:1,e:"Max pooling selects the maximum value from each window (e.g., 2×2). A 2×2 MaxPool with stride 2 halves each spatial dimension. Retains strongest activations."},
+  {q:"What is a Feature Map in CNN?",o:["A lookup table for features","The output produced by applying a convolutional filter across the entire input","A list of all features in the dataset","The weight matrix of a fully connected layer"],a:1,e:"A feature map is the output of one convolution operation. It shows the spatial distribution of what one particular filter detected (e.g., vertical edges at each position)."},
+  {q:"What formula gives the output size of a convolutional layer?",o:["(Input + Filter) / Stride","⌊(Input − Filter + 2×Padding) / Stride⌋ + 1","Input × Filter − Padding","Input / (Filter + Stride)"],a:1,e:"Output = ⌊(Input − Filter + 2P) / Stride⌋ + 1. Example: 32×32 input, 5×5 filter, stride 1, no padding → (32−5)/1+1 = 28×28 output."},
+  {q:"Who developed LeNet-5 and what was it designed for?",o:["Alex Krizhevsky, for object detection","Yann LeCun, for handwritten digit recognition","Karen Simonyan, for face recognition","Kaiming He, for image segmentation"],a:1,e:"LeNet-5 was developed by Yann LeCun (1998) for handwritten digit recognition (MNIST). It was used commercially for reading ZIP codes and bank checks."},
+  {q:"What year did AlexNet win ImageNet and by how much?",o:["2010, by 2% margin","2012, error of 15.3% vs. 26% for 2nd place","2014, by 1% margin","2015, surpassing human performance"],a:1,e:"AlexNet won ILSVRC 2012 with 15.3% top-5 error — more than 10% better than the 2nd place (26%). This enormous gap revolutionized computer vision and started the deep learning era."},
+  {q:"What was AlexNet's most important architectural innovation?",o:["Using large 11×11 filters only","Using ReLU activation, Dropout, and GPU training combined","Using 8 layers instead of 5","Using average pooling throughout"],a:1,e:"AlexNet combined: (1) ReLU instead of Tanh → 6× faster training, (2) Dropout in FC layers → prevented overfitting, (3) Training on 2 GPUs → enabled 60M parameter network on 1.2M images."},
+  {q:"What is VGGNet's defining design principle?",o:["Use very large filters (11×11, 7×7)","Use only very small 3×3 convolution filters throughout, stacked deeply","Use depthwise separable convolutions","Use dilated convolutions"],a:1,e:"VGG (Simonyan & Zisserman, 2014) used only 3×3 filters. Two 3×3 layers = 5×5 receptive field with fewer params and more non-linearities. VGG-16 has 13 conv layers + 3 FC layers."},
+  {q:"How many parameters does VGG-16 have?",o:["~60 million","~25 million","~138 million","~11 million"],a:2,e:"VGG-16 has ~138 million parameters — most in the fully connected layers (122M). This is why it needs large GPU memory and is slow to train compared to ResNet (~25M params)."},
+  {q:"What problem did ResNet solve?",o:["Overfitting in shallow networks","The degradation problem — very deep networks training worse than shallower ones","Too many parameters in VGG","Slow convergence in AlexNet"],a:1,e:"The degradation problem: adding more layers beyond ~20 caused training accuracy to decrease (not test accuracy — the training error itself degraded). Skip connections solved this."},
+  {q:"What is a skip/residual connection in ResNet?",o:["A dropout layer that skips random neurons","A shortcut that adds the input x directly to the output F(x)+x, bypassing 2-3 layers","A pooling layer that skips small features","A connection that skips the activation function"],a:1,e:"ResNet: Output = F(x) + x. The identity shortcut passes x unchanged around 2-3 conv layers. If layers aren't helpful, F(x)→0 → output = x (identity). Solves degradation and vanishing gradients."},
+  {q:"ResNet's achievement on ImageNet 2015 was notable because:",o:["It achieved 0% error","It was the first to surpass estimated human-level performance","It used fewer layers than LeNet","It ran on CPU only"],a:1,e:"ResNet-152 achieved ~3.57% top-5 error on ImageNet — below estimated human performance (~5.1%). First time a machine surpassed humans on this benchmark."},
+  {q:"What is an RNN and why is it suited for sequences?",o:["A network for images using recurrent filters","A network with loops that maintains a hidden state, giving it memory of previous inputs in a sequence","A network that trains recursively on data","A type of optimizer for sequential learning"],a:1,e:"RNN processes one element at a time while updating hidden state hₜ = tanh(Wₕhₜ₋₁ + Wₓxₜ + b). The hidden state carries information from previous steps — this is the 'memory'. Perfect for variable-length sequences."},
+  {q:"What is the Vanishing Gradient Problem specific to RNNs?",o:["The hidden state grows too large over time","Gradients become exponentially small when backpropagating through many time steps, causing early time steps to not learn","The network runs out of memory for long sequences","Predictions degrade as sequence length increases"],a:1,e:"In BPTT, gradients are multiplied across T time steps. With T=50 and gradient<1 each step: 0.9^50 ≈ 0.005. The network cannot connect information across long distances. LSTM/GRU solves this."},
+  {q:"How many gates does an LSTM have?",o:["2 gates","3 gates","4 gates","5 gates"],a:1,e:"LSTM has 3 gates: (1) Forget gate — what to remove from cell state, (2) Input gate — what new info to add, (3) Output gate — what to output. Plus a cell state Cₜ as long-term memory."},
+  {q:"What is the Cell State in LSTM?",o:["Same as hidden state","A separate 'memory highway' that runs through the network with minimal modification, enabling long-term memory","The output of the forget gate","The concatenation of all hidden states"],a:1,e:"The cell state Cₜ is a separate vector updated as: Cₜ = fₜ⊙Cₜ₋₁ + iₜ⊙C̃ₜ. Information can flow unchanged over many steps (unlike hidden state). Key to solving vanishing gradients."},
+  {q:"What is the role of the Forget Gate in LSTM?",o:["Add new information to cell state","Decide what information to remove/keep from the previous cell state","Output the prediction","Control the learning rate"],a:0,e:"Forget gate: fₜ = σ(Wf·[hₜ₋₁, xₜ] + bf). Output is [0,1] for each cell state dimension. 0=completely forget, 1=completely remember. Example: reading a new subject → forget old subject's gender."},
+  {q:"How does GRU differ from LSTM?",o:["GRU has more parameters","GRU has 2 gates (reset+update) instead of LSTM's 3, and merges cell state with hidden state","GRU is slower to train","GRU cannot handle long sequences"],a:1,e:"GRU (Cho et al., 2014) simplified LSTM: (1) Only 2 gates: reset gate and update gate, (2) No separate cell state — merged into hidden state. Fewer params, faster training, comparable performance."},
+  {q:"What is a Bidirectional RNN?",o:["An RNN that can predict in both forward and backward time","Two RNN layers processing the sequence in opposite directions (forward + backward), concatenating hidden states","An RNN with two hidden layers","An RNN that backtracks when it makes errors"],a:1,e:"Bi-RNN = one RNN reading left-to-right + one reading right-to-left. At each position: output = concat(h⃗ₜ, h⃖ₜ). Each position has full context from both past and future."},
+  {q:"Why can't Bidirectional RNN be used for real-time text generation?",o:["It has too many parameters","It requires the complete sequence before processing, so cannot generate one word at a time","It only works for classification","Bidirectional training is unstable"],a:1,e:"The backward RNN needs future tokens, which don't exist during generation. Real-time generation (chatbots, autocomplete) must use left-to-right only (autoregressive) models like GPT."},
+  {q:"What is Tokenization in NLP?",o:["Converting words to binary vectors","Splitting raw text into individual units (words, subwords, or characters)","Removing rare words from vocabulary","Normalizing text to lowercase"],a:1,e:"Tokenization converts a string of text into a list of tokens. Can be word-level ('hello world'→['hello','world']), character-level, or subword (BPE used in BERT/GPT)."},
+  {q:"What is the difference between Stemming and Lemmatization?",o:["Stemming is more accurate","Stemming is faster (crude suffix removal) but may produce non-words; Lemmatization gives proper dictionary base forms","They are identical processes","Lemmatization only works on verbs"],a:1,e:"Stemming: 'studies'→'studi' (crude, fast). Lemmatization: 'studies'→'study' (correct base form, uses linguistic knowledge). Both normalize words to base form but with different accuracy-speed tradeoff."},
+  {q:"What does TF stand for in TF-IDF?",o:["Text Feature","Total Frequency","Term Frequency — how often a term appears in a document","Training Factor"],a:2,e:"TF = Term Frequency = count(term in doc) / total words in doc. Measures how often a specific term appears relative to document length. Combined with IDF to weight important words."},
+  {q:"What does IDF measure?",o:["How long a document is","How rare a term is across all documents in the corpus","How many times a term appears","How related terms are to each other"],a:1,e:"IDF = Inverse Document Frequency = log(N/df(t)). If term appears in all N documents, IDF≈0. Rare terms get high IDF. Words like 'the' (appears everywhere) → IDF≈0 → filtered out."},
+  {q:"What does Word2Vec produce?",o:["A dictionary of word definitions","Dense low-dimensional vector representations (embeddings) where similar words have similar vectors","A frequency count of words","A one-hot encoded word matrix"],a:1,e:"Word2Vec trains a shallow neural network (predict word from context or vice versa) to produce dense vectors (100-300 dims). Similar semantic words cluster together in vector space."},
+  {q:"Complete the Word2Vec analogy: King − Man + Woman ≈ ?",o:["Prince","Queen","Girl","Empress"],a:1,e:"vector(King)−vector(Man)+vector(Woman)≈vector(Queen). This classic example shows Word2Vec learned gender and royalty as linear relationships in the embedding space, purely from text patterns."},
+  {q:"What does NER stand for in NLP?",o:["Neural Embedding Representation","Normalized Entity Ranking","Named Entity Recognition — identifying entities like persons, organizations, locations in text","Negative Example Removal"],a:2,e:"Named Entity Recognition identifies and classifies entities in text: PERSON (Obama), ORGANIZATION (Google), LOCATION (Paris), DATE (Monday), MONEY ($100), etc."},
+  {q:"What is Stop Word Removal?",o:["Removing words that appear too rarely","Removing common function words (the, is, are, at) that carry little semantic meaning","Removing numerical values from text","Removing duplicate sentences"],a:1,e:"Stop words are high-frequency function words (the, a, is, are...) with minimal semantic content. Removing them reduces vocabulary size and noise. But not always beneficial — 'not' is a stop word but changes meaning!"},
+  {q:"What is the Universal Approximation Theorem?",o:["Any ML algorithm can solve any problem given enough data","A feedforward neural network with one hidden layer and sufficient neurons can approximate any continuous function","Neural networks always converge to the global optimum","Deep networks always outperform shallow ones"],a:1,e:"Universal Approximation Theorem (Cybenko, 1989; Hornik, 1991): A single-hidden-layer MLP with finite neurons can approximate any continuous function to arbitrary precision. Theoretical justification for neural networks."},
+  {q:"Which optimizer adapts the learning rate individually for each parameter?",o:["Vanilla SGD","Batch Gradient Descent","Adam (Adaptive Moment Estimation)","Momentum SGD"],a:2,e:"Adam maintains per-parameter adaptive learning rates using first moment (mean of gradients) and second moment (mean of squared gradients). Default choice for most deep learning tasks."},
+  {q:"What is L2 Regularization (Ridge)?",o:["Adds |w| to loss → sparse weights","Adds w² to loss → shrinks all weights toward zero (weight decay)","Removes 50% of weights randomly","Normalizes weights to sum to 1"],a:1,e:"L2: L_total = L + λΣwᵢ². Gradient of λw² = 2λw → weights decay toward zero. Discourages large weights, prevents overfitting. Called 'weight decay' in many frameworks."},
+  {q:"What happens during the forward pass in a neural network?",o:["Gradients are computed and sent backward","Input data flows through all layers to produce a prediction output","Weights are updated using gradient descent","The loss function is minimized"],a:1,e:"Forward pass: Input X → Layer 1 (Z₁=W₁X+b₁, A₁=f(Z₁)) → Layer 2 → ... → Output ŷ. Pure computation of the prediction. No weight updates yet — those happen after backprop."},
+  {q:"What type of data is RNN best suited for compared to CNN?",o:["Images and spatial data","Tabular/structured data","Sequential data with temporal dependencies (text, speech, time series)","Unstructured data"],a:2,e:"CNN excels at spatial data (images) using local connectivity and shared filters. RNN excels at sequential data where order and temporal context matter: text, speech, stock prices, music, sensor readings."},
+  {q:"What is the key contribution of skip connections in ResNet beyond depth?",o:["They reduce model size","They allow gradients to flow directly to earlier layers, solving the vanishing gradient problem in very deep networks","They increase the number of filters","They replace pooling layers"],a:1,e:"Skip connections create gradient highways — during backprop, gradients can flow directly through the identity shortcut without degrading. This enables training of 100+ layer networks effectively."},
+];
+
+let ans=0,cor=0,wr=0;
+function renderQ(){
+  document.getElementById('qc').innerHTML=Q.map((q,i)=>`
+    <div class="qb" id="qb${i}">
+      <div class="qtag">Question ${i+1} / 50 &nbsp;·&nbsp; ${getTag(i)}</div>
+      <div class="qtxt">${q.q}</div>
+      <div class="opts-grid" id="og${i}">
+        ${q.o.map((o,j)=>`<div class="opt" id="opt${i}_${j}" onclick="pick(${i},${j})"><span class="ok">${'ABCD'[j]}</span><span>${o}</span></div>`).join('')}
+      </div>
+      <div class="expl" id="ex${i}">💡 ${q.e}</div>
+    </div>`).join('');
+}
+function getTag(i){
+  const tags=['Perceptron','Perceptron','Perceptron','Perceptron','ANN','Backprop','Backprop','Activation','Activation','Activation','Activation','Activation','Regularization','Regularization','Dimensionality','Dimensionality','CNN','CNN','CNN','CNN','LeNet','AlexNet','AlexNet','VGGNet','VGGNet','ResNet','ResNet','ResNet','RNN','RNN','LSTM','LSTM','LSTM','LSTM','GRU','Bi-RNN','Bi-RNN','NLP','NLP','NLP','NLP','TF-IDF','TF-IDF','Word2Vec','Word2Vec','NER','NLP','ML Theory','Optimizer','Regularization','Forward Pass','RNN vs CNN','ResNet'];
+  return `<span class="badge bb" style="font-size:10px;padding:2px 7px">${tags[i]||''}</span>`;
+}
+function pick(qi,sel){
+  const qb=document.getElementById(`qb${qi}`);
+  if(qb.classList.contains('ok')||qb.classList.contains('ng'))return;
+  const ca=Q[qi].a;
+  document.querySelectorAll(`#og${qi} .opt`).forEach(o=>o.classList.add('dis'));
+  document.getElementById(`opt${qi}_${sel}`).classList.add(sel===ca?'ca':'wa');
+  if(sel!==ca)document.getElementById(`opt${qi}_${ca}`).classList.add('ca');
+  document.getElementById(`ex${qi}`).classList.add('show');
+  qb.classList.add(sel===ca?'ok':'ng');
+  ans++;sel===ca?cor++:wr++;
+  updateS();
+}
+function updateS(){
+  document.getElementById('sa').textContent=ans;
+  document.getElementById('sc').textContent=cor;
+  document.getElementById('sw').textContent=wr;
+  const p=ans>0?Math.round(cor/ans*100):0;
+  document.getElementById('ss').textContent=p+'%';
+  document.getElementById('pf').style.width=p+'%';
+}
+function resetQ(){ans=0;cor=0;wr=0;updateS();renderQ();}
+renderQ();
+
+// Intersection observer for nav highlighting
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const id=e.target.id;
+      document.querySelectorAll('.nav-item').forEach(n=>{
+        n.classList.toggle('active',n.getAttribute('onclick')&&n.getAttribute('onclick').includes(id));
+      });
+    }
+  });
+},{threshold:0.3});
+document.querySelectorAll('.section,[id^="s"]').forEach(s=>obs.observe(s));
+</script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+import java.util.*;
+
+public class _180_LargestSubarrSum0 {
+    public static void main(String[] args) {
+        int arr[] = { 15, -2, 2, -8, 1, 7, 10, 23 };
+        HashMap<Integer, Integer> hm = new HashMap<>();
+        int sum = 0;
+        int len = 0;
+        for (int i = 0; i < arr.length; i++) {
+            sum += arr[i];
+            if (hm.containsKey(sum)) {
+                len = Math.max(len, i - hm.get(sum));
+            } else {
+                hm.put(sum, i);
+            }
+        }
+        System.out.println(len);
+    }
+}
